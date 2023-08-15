@@ -11,3 +11,4 @@ export const create =
   };
 
 export const LazyBridge = create(lazy(() => import("../../pages/bridge")));
+export const LazyMint = create(lazy(() => import("../../pages/mint")));

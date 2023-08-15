@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import {HashRouter, Outlet, Route, Routes} from "react-router-dom";
-import {LazyBridge} from "./elements";
+import {LazyBridge, LazyMint} from "./elements";
 
 const Router: React.FC = () => {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<LazyBridge />} />
-
+        {/* <Route path="/" element={<LazyBridge />} /> */}
+        <Route path="/" element={<LazyMint />} />
         {/* <Route
           path="/"
           element={

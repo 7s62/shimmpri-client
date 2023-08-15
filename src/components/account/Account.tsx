@@ -23,7 +23,7 @@ export const Account = () => {
     //     </>
     //   )}
     // </div>
-    <div>
+    <div className="">
       {wallet.accounts.length > 0 && (
         <div className="skyline--input-box-shadow p-2 text-[12px] bg-blue-200 border border-none rounded-xl text-gray-900 max-w-[150px] shadow-xl shadow-pink-500">
           <div className="flex justify-center items-center space-x-2">
