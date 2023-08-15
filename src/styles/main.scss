@@ -12,8 +12,25 @@
 
 .main-body {
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 245 / var(--tw-bg-opacity));
+  position: relative;
+  // background-color: rgb(243 244 245 / var(--tw-bg-opacity));
 }
+
+.bg-absolute-color {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: -5%;
+
+  // z-index: -99;
+  background-image: url("../assets/images/ellipse4.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 500px;
+  height: 500px;
+  /* Add the blur effect */
+}
+
 .skyline-dex--input {
   border-radius: 12px;
 }

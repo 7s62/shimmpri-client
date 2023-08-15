@@ -7,13 +7,16 @@ import "../styles/main.scss";
 
 const App: React.FC = () => {
   return (
-    <MetaMaskContextProvider>
-      <div className="main-body bg-[url('../assets/images/cool-background.png')] bg-cover w-full leading-6">
-        <Header />
-        <Router />
-        <Footer />
-      </div>
-    </MetaMaskContextProvider>
+    <div className="relative">
+      <div className="bg-absolute-color"></div>
+      <MetaMaskContextProvider>
+        <div className="main-body bg-[#110929] w-full leading-6">
+          <Header />
+          <Router />
+          <Footer />
+        </div>
+      </MetaMaskContextProvider>
+    </div>
   );
 };
 export default App;

@@ -16,6 +16,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        tao: "rgba(141, 28, 254, 1)",
+        btnprimary: "rgba(141, 28, 254, 1)",
         gray: {
           100: "#f2f4f7",
           200: "#e1e4e9",
