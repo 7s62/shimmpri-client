@@ -12,7 +12,7 @@ const DetailContainer: React.FC<{title: string; data: string}> = ({
 const MintNFT: React.FC<{}> = ({}) => {
   return (
     <div className="h-screen text-white py-24 px-6">
-      <div className="max-w-[1300px] mx-auto flex justify-between items-center">
+      <div className="max-w-[1300px] mx-auto flex flex-col justify-between items-center  md:flex md:flex-row ">
         <div className="flex-1 flex flex-col justify-center items-center">
           <h1 className="text-[80px] leading-[80px] font-extrabold">
             <p>Create your</p>

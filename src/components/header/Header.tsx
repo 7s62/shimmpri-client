@@ -24,13 +24,13 @@ const Header: React.FC<{}> = () => {
   };
   console.log("7s200:provider:", hasProvider, isConnecting);
   return (
-    <div className="!text-white">
+    <div className="!text-white !z-2">
       <nav
         className="mx-auto max-w-[1200px] flex max-w-7xl items-center justify-between p-6 lg:px-8 w-full"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a className="">
+          <a className="cursor-pointer !z-2">
             <SkylineLogo />
           </a>
         </div>
@@ -54,7 +54,7 @@ const Header: React.FC<{}> = () => {
         </div>
         <div className="hidden lg:flex lg:gap-x-12 text-white text-[20px] font-bold">
           <a href="#" className="text-sm font-semibold leading-6">
-            Mint
+            Mint NFT
           </a>
           <a href="#" className="text-sm font-semibold leading-6">
             Comunity
