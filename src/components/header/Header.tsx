@@ -18,15 +18,14 @@ const Header: React.FC<{}> = () => {
     connectMetaMask();
   };
   //dice theory police clog soldier obey such say gentle skull fantasy illness
-
+  console.log("7s2005:isConnection:", isConnecting);
   const onHandleInstallWallet = () => {
     window.open("https://metamask.io", "_blank", "noopener,noreferrer");
   };
-  console.log("7s200:provider:", hasProvider, isConnecting);
   return (
     <div className="!text-white !z-2">
       <nav
-        className="mx-auto max-w-[1200px] flex max-w-7xl items-center justify-between p-6 lg:px-8 w-full"
+        className="mx-auto !max-w-[1200px] flex max-w-7xl items-center justify-between p-6 lg:px-8 w-full"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
@@ -34,10 +33,10 @@ const Header: React.FC<{}> = () => {
             <SkylineLogo />
           </a>
         </div>
-        <div className="flex lg:hidden">
+        <div className="z-3 flex md:hidden">
           <button
             type="button"
-            className="w-[24px] h-[24px]"
+            className="z-[2] w-[24px] h-[24px]"
             onClick={() => onHanldeOpenMobileMenu()}
           >
             <svg
@@ -63,21 +62,22 @@ const Header: React.FC<{}> = () => {
             Contacts
           </a>
         </div>
+        {/* Wallet */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           {hasProvider ? (
-            isConnecting ? (
+            wallet.accounts.length > 0 ? (
+              <Account />
+            ) : (
               <Button
-                className="!text-[14px] bg-purple-500"
+                className="!text-[14px] text-white bg-tao"
                 onClick={() => onHandleConnectWallet()}
               >
                 Conntect wallet
               </Button>
-            ) : (
-              <Account />
             )
           ) : (
             <Button
-              className="!text-[14px] bg-purple-500"
+              className="!text-[14px] text-white bg-tao"
               onClick={() => onHandleInstallWallet()}
             >
               Install MetaMask
@@ -89,8 +89,8 @@ const Header: React.FC<{}> = () => {
           // role="dialog"
           aria-modal="true"
         >
-          <div className="fixed inset-0 z-10"></div>
-          <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 !text-black ">
+          {/* <div className="fixed inset-0 !z-10"></div> */}
+          <div className="fixed inset-y-0 right-0 !z-10 w-full overflow-y-auto bg-white px-6 py-6 !text-black ">
             {/* sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 */}
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">

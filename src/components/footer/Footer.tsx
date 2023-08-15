@@ -7,8 +7,8 @@ import SkylineLogo from "../../assets/icons/skyline";
 const Footer: React.FC = () => {
   return (
     <footer className="py-[32px] text-white shadow-lg">
-      <div className="mx-auto flex justify-center space-x-10 items-center gap-y-4">
-        <a className="w-[115px] h-[50px]">
+      <div className="max-w-[1200px] mx-auto flex justify-center space-x-10 items-center gap-y-4">
+        <a className="">
           <SkylineLogo />
         </a>
         <div className="flex space-x-6">
