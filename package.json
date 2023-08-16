@@ -9,6 +9,8 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@reduxjs/toolkit": "^1.9.5",
     "@sindresorhus/class-names": "^2.0.0",
+    "@styled-icons/bootstrap": "^10.47.0",
+    "@styled-icons/boxicons-regular": "^10.47.0",
     "@styled-icons/boxicons-solid": "^10.47.0",
     "@styled-icons/evaicons-outline": "^10.46.0",
     "@styled-icons/evaicons-solid": "^10.46.0",

@@ -22,7 +22,9 @@ interface MetaMaskContextData {
   error: boolean;
   errorMessage: string;
   isConnecting: boolean;
+  isDisconnecting: boolean;
   connectMetaMask: () => void;
+  disconnectMetaMask: () => void;
   clearError: () => void;
 }
 
@@ -36,6 +38,7 @@ export const MetaMaskContextProvider = ({children}: PropsWithChildren) => {
   const [hasProvider, setHasProvider] = useState<boolean | null>(null);
 
   const [isConnecting, setIsConnecting] = useState(false);
+  const [isDisconnecting, setIsDisconnecting] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
   const clearError = () => setErrorMessage("");
@@ -117,6 +120,20 @@ export const MetaMaskContextProvider = ({children}: PropsWithChildren) => {
     setIsConnecting(false);
   };
 
+  const disconnectMetaMask = async () => {
+    setIsDisconnecting(true);
+    try {
+      (window as any).ethereum.on("disconnect", () => {
+        console.log("MetaMask discconnected");
+      });
+      clearError();
+      updateWallet([]);
+    } catch (err: any) {
+      setErrorMessage(err.message);
+    }
+    setIsDisconnecting(false);
+  };
+
   return (
     <MetaMaskContext.Provider
       value={{
@@ -125,7 +142,9 @@ export const MetaMaskContextProvider = ({children}: PropsWithChildren) => {
         error: !!errorMessage,
         errorMessage,
         isConnecting,
+        isDisconnecting,
         connectMetaMask,
+        disconnectMetaMask,
         clearError,
       }}
     >

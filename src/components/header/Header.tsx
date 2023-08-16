@@ -69,7 +69,7 @@ const Header: React.FC<{}> = () => {
               <Account />
             ) : (
               <Button
-                className="!text-[14px] text-white bg-tao"
+                className="!text-[14px] !bg-tao"
                 onClick={() => onHandleConnectWallet()}
               >
                 Conntect wallet
@@ -77,7 +77,7 @@ const Header: React.FC<{}> = () => {
             )
           ) : (
             <Button
-              className="!text-[14px] text-white bg-tao"
+              className="!text-[14px] text-white !bg-tao"
               onClick={() => onHandleInstallWallet()}
             >
               Install MetaMask
