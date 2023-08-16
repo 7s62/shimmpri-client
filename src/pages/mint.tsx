@@ -1,5 +1,7 @@
 import {balueSMC} from "../services/smc";
 import {truncateEthAddress, txTruncateEthAddress} from "../utils/address";
+import abi from "../services/abi.json";
+import {useContractWrite} from "wagmi";
 
 const DetailContainer: React.FC<{title: string; data: string}> = ({
   title,
@@ -143,9 +145,19 @@ const UserCard: React.FC<{rank: number}> = ({rank}) => {
 };
 
 const MintNFT: React.FC<{}> = ({}) => {
-  const onHandleMintNFT = async () => {
-    const a = await balueSMC.totalSupply();
-    console.log("7s2004:a", a);
+  const {data, isLoading, isSuccess, write} = useContractWrite({
+    address: process.env.REACT_APP_NFT_CONTRACT_ADDRESS! as any,
+    abi: abi,
+    functionName: "safeMint",
+  });
+  console.log("7s2:b", isLoading);
+  console.log("7s2:c", isSuccess);
+  console.log("7s2:d", data);
+
+  const onHandleMintNFT = () => {
+    // const a = await balueSMC.totalSupply();
+    // console.log("7s2004:a", a);
+    write();
   };
   return (
     <div className=" text-white py-24 px-6">

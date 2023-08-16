@@ -13,15 +13,6 @@ const Header: React.FC<{}> = () => {
     setIsActiveMobileMenu(!isActiveMobileMenu);
   };
 
-  const onHandleConnectWallet = () => {
-    console.log("7s2005:hasProvider", hasProvider, isConnecting, wallet);
-    connectMetaMask();
-  };
-  //dice theory police clog soldier obey such say gentle skull fantasy illness
-  console.log("7s2005:isConnection:", isConnecting);
-  const onHandleInstallWallet = () => {
-    window.open("https://metamask.io", "_blank", "noopener,noreferrer");
-  };
   return (
     <div className="!text-white !z-2">
       <nav
