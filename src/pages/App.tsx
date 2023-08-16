@@ -10,6 +10,9 @@ import {alchemyProvider} from "wagmi/providers/alchemy";
 import {publicProvider} from "wagmi/providers/public";
 import "../styles/main.scss";
 import PopupProvider from "../components/popup/PopupProvider";
+import {Provider} from "react-redux";
+import {store} from "../app/store";
+import Toast from "../components/toast/Toast";
 
 const App: React.FC = () => {
   const {chains, publicClient} = configureChains(
@@ -39,13 +42,16 @@ const App: React.FC = () => {
       <div className="bg-absolute-color"></div>
       <WagmiConfig config={wagmiConfig}>
         <RainbowKitProvider chains={chains}>
-          <div className="main-body bg-[#110929] w-full leading-6">
-            <Header />
-            <PopupProvider>
-              <Router />
-            </PopupProvider>
-            <Footer />
-          </div>
+          <Provider store={store}>
+            <div className="main-body bg-[#110929] w-full leading-6">
+              <Header />
+              <PopupProvider>
+                <Toast />
+                <Router />
+              </PopupProvider>
+              <Footer />
+            </div>
+          </Provider>
         </RainbowKitProvider>
       </WagmiConfig>
     </div>

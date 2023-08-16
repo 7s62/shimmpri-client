@@ -1,19 +1,31 @@
 import {balueSMC} from "../services/smc";
 import {truncateEthAddress, txTruncateEthAddress} from "../utils/address";
 import abi from "../services/abi.json";
-import {useContractWrite} from "wagmi";
+import {
+  useAccount,
+  useContractRead,
+  useContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
 import {usePopups} from "../components/popup/PopupProvider";
 import Popup from "../components/popup/Popup";
 import Loading from "../components/loading/Loading";
-import {useEffect, useState} from "react";
+import {Component, useEffect, useState} from "react";
 import LoadingV2 from "../components/loading/LoadingV2";
-
-const DetailContainer: React.FC<{title: string; data: string}> = ({
-  title,
-  data,
-}) => {
+import {setToast} from "../components/toast/toastReducer";
+import {useAppDispatch} from "../redux/store";
+import {Exit} from "@styled-icons/boxicons-regular";
+import {TravelExplore} from "@styled-icons/material-outlined";
+import openInNewTab from "../utils/direct";
+const DetailContainer: React.FC<{
+  title: string;
+  data: string;
+  className?: string;
+}> = ({title, data, className}) => {
   return (
-    <div className="flex-1 flex flex-col justify-center items-center">
+    <div
+      className={`${className} flex-1 flex flex-col justify-center items-center`}
+    >
       <div className="">{title}</div>
       <p>{data}</p>
     </div>
@@ -150,26 +162,151 @@ const UserCard: React.FC<{rank: number}> = ({rank}) => {
 };
 
 const MintNFT: React.FC<{}> = ({}) => {
-  const {addPopup, removePopup} = usePopups();
   const [loading, setLoading] = useState(false);
-  const [notiContent, setNotiContent] = useState("");
+  const {addPopup, removeAll} = usePopups();
+  const [nftID, setNFTID] = useState("99999999");
+  const dispatch = useAppDispatch();
+  const {address, isConnecting, isDisconnected} = useAccount();
 
-  const {data, isLoading, isSuccess, write, status, isIdle} = useContractWrite({
+  const {
+    data: mintData,
+    isLoading,
+    isSuccess,
+    write,
+    status,
+  } = useContractWrite({
     address: process.env.REACT_APP_NFT_CONTRACT_ADDRESS! as any,
     abi: abi,
     functionName: "safeMint",
   });
+
+  const {
+    data: txnData,
+    isError,
+    isLoading: isTxnLoading,
+  } = useWaitForTransaction({
+    hash: mintData?.hash,
+  });
+  // console.log("7s200:txnData", txnData, isTxnLoading, isError);
+
+  const {} = useContractRead({
+    address: process.env.REACT_APP_NFT_CONTRACT_ADDRESS! as any,
+    abi: abi,
+    functionName: "tokenURI",
+    args: [nftID],
+    onSuccess: (data: any) => {
+      console.log("7s2004:data", data);
+      fetch(data)
+        .then(async (res: any) => {
+          const nftDetail = await res.json();
+          console.log("7s200", nftDetail.attributes);
+          addPopup({
+            Component: () => {
+              return (
+                <Popup className="bg-white">
+                  <h2 className="text-center font-bold text-[24px] leading-[28px] ">
+                    Congratulation!
+                  </h2>
+                  <div className="px-3 mb-2 mt-8 border-b-[1px] border-gray-300">
+                    <div className="flex flex-col justify-center items-center space-y-2">
+                      <img
+                        className="w-[200px] h-[200px]"
+                        src={nftDetail.image}
+                        alt="nftimg"
+                      />
+                      <div className="text-[18px] font-semibold">
+                        {nftDetail.name}
+                      </div>
+                    </div>
+                    <div className="flex justify-center items-center space-x-2 !text-gray-900 mx-16 my-4 p-2">
+                      <DetailContainer
+                        className="font-bold"
+                        title="Level"
+                        data={nftDetail.attributes[0].value}
+                      />
+                      <DetailContainer
+                        className="font-bold"
+                        title="Point"
+                        data={nftDetail.attributes[1].value}
+                      />
+                      <DetailContainer
+                        className="font-bold"
+                        title="Day"
+                        data={nftDetail.attributes[2].value}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full flex justify-between items-center !text-white">
+                    <button
+                      onClick={() => {
+                        console.log("7s200", mintData?.hash);
+                        window.open(
+                          `https://goerli.etherscan.io/tx/${mintData?.hash}`,
+                          "_blank",
+                          "noopener,noreferrer"
+                        );
+                      }}
+                      className="flex-1 bg-tao max-w-[200px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
+                    >
+                      <p>View on explore</p>
+                      <TravelExplore size={20} />
+                    </button>
+                    <button
+                      onClick={() => removeAll()}
+                      className="flex-1 bg-tao max-w-[200px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
+                    >
+                      <p>Back to mint</p>
+                      <Exit size={20} />
+                    </button>
+                  </div>
+                </Popup>
+              );
+            },
+          });
+          return;
+        })
+        .catch((err) => {
+          console.log("7s200:err", err);
+          dispatch(
+            setToast({
+              show: true,
+              title: "",
+              message: `Something wrong!`,
+              type: "error",
+            })
+          );
+          setLoading(false);
+          return;
+        });
+    },
+  });
+
   useEffect(() => {
-    if (data?.hash) {
-      setNotiContent("Submit transaction success!");
+    if (txnData) {
+      dispatch(
+        setToast({
+          show: true,
+          title: "",
+          message: `Submit transaction success!`,
+          type: "success",
+        })
+      );
+      setNFTID(txnData.logs[0].topics[3] as any);
       setLoading(false);
       return;
-    } else {
-      setNotiContent("Something wrong!");
+    } else if (status === "error" || isError) {
+      dispatch(
+        setToast({
+          show: true,
+          title: "",
+          message: `Something wrong!`,
+          type: "error",
+        })
+      );
       setLoading(false);
       return;
     }
-  }, [data, isLoading]);
+  }, [mintData, txnData]);
 
   const onHandleMintNFT = () => {
     setLoading(true);
@@ -178,7 +315,7 @@ const MintNFT: React.FC<{}> = ({}) => {
 
   return (
     <div className=" text-white py-24 px-6">
-      <div className="max-w-[1300px] mx-auto flex flex-col justify-between items-center  md:flex md:flex-row ">
+      <div className="max-w-[1300px] space-x-2 mx-auto flex flex-col justify-between items-center  md:flex md:flex-row ">
         <div className="flex-1 flex flex-col justify-center items-center">
           <h1 className="text-[80px] leading-[80px] font-extrabold">
             <p>Create your</p>
@@ -216,11 +353,13 @@ const MintNFT: React.FC<{}> = ({}) => {
               </div>
               <div className="w-full flex justify-center items-center">
                 <button
-                  className="bg-btnprimary w-full text-[20px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex justify-center items-center"
+                  className={`bg-btnprimary w-full text-[20px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex justify-center items-center disabled:bg-gray-200 disabled:text-gray-900`}
                   onClick={() => onHandleMintNFT()}
+                  disabled={address ? false : true}
                 >
-                  <LoadingV2 size={20} isLoading={loading} />
-                  {loading === false && " Mint Now"}
+                  <LoadingV2 size={28} isLoading={loading} />
+                  {loading === false && address && " Mint Now"}
+                  {!address && "Connect wallet to mint NFT"}
                 </button>
               </div>
               <div className="flex justify-center items-center space-x-2">
