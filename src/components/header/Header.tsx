@@ -2,8 +2,8 @@ import {useState} from "react";
 import {CloseOutline} from "@styled-icons/evaicons-outline";
 import SkylineLogo from "../../assets/icons/skyline";
 import {useMetaMask} from "../../hooks/useMetamask";
-import Button from "../button/Button";
-import {Account} from "../account/Account";
+
+import {ConnectButton} from "@rainbow-me/rainbowkit";
 
 const Header: React.FC<{}> = () => {
   const [isActiveMobileMenu, setIsActiveMobileMenu] = useState(false);
@@ -63,26 +63,9 @@ const Header: React.FC<{}> = () => {
           </a>
         </div>
         {/* Wallet */}
+
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          {hasProvider ? (
-            wallet.accounts.length > 0 ? (
-              <Account />
-            ) : (
-              <Button
-                className="!text-[14px] !bg-tao"
-                onClick={() => onHandleConnectWallet()}
-              >
-                Conntect wallet
-              </Button>
-            )
-          ) : (
-            <Button
-              className="!text-[14px] text-white !bg-tao"
-              onClick={() => onHandleInstallWallet()}
-            >
-              Install MetaMask
-            </Button>
-          )}
+          <ConnectButton />
         </div>
         <div
           className={isActiveMobileMenu === false ? "hidden" : "md:hidden"}
