@@ -1,3 +1,4 @@
+import {balueSMC} from "../services/smc";
 import {truncateEthAddress, txTruncateEthAddress} from "../utils/address";
 
 const DetailContainer: React.FC<{title: string; data: string}> = ({
@@ -11,6 +12,7 @@ const DetailContainer: React.FC<{title: string; data: string}> = ({
     </div>
   );
 };
+
 const LeaderBoardUserItem: React.FC<{}> = () => {
   return (
     <div className="flex flex-start">
@@ -31,6 +33,7 @@ const LeaderBoardUserItem: React.FC<{}> = () => {
     </div>
   );
 };
+
 const LeaderBoardItem: React.FC<{}> = () => {
   return (
     <tr className="bg-[#251163] w-full border border-none rounded-xl text-gray-300">
@@ -77,6 +80,7 @@ const Table: React.FC<{}> = () => {
     </div>
   );
 };
+
 const UserCard: React.FC<{rank: number}> = ({rank}) => {
   const getRankImg = () => {
     if (rank === 1) {
@@ -137,7 +141,12 @@ const UserCard: React.FC<{rank: number}> = ({rank}) => {
     </div>
   );
 };
+
 const MintNFT: React.FC<{}> = ({}) => {
+  const onHandleMintNFT = async () => {
+    const a = await balueSMC.totalSupply();
+    console.log("7s2004:a", a);
+  };
   return (
     <div className=" text-white py-24 px-6">
       <div className="max-w-[1300px] mx-auto flex flex-col justify-between items-center  md:flex md:flex-row ">
@@ -177,7 +186,10 @@ const MintNFT: React.FC<{}> = ({}) => {
                 <DetailContainer title="Total" data="300" />
               </div>
               <div className="w-full flex justify-center items-center">
-                <button className="bg-btnprimary w-full text-[20px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl">
+                <button
+                  className="bg-btnprimary w-full text-[20px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl"
+                  onClick={() => onHandleMintNFT()}
+                >
                   Mint Now
                 </button>
               </div>
