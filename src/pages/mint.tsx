@@ -2,6 +2,11 @@ import {balueSMC} from "../services/smc";
 import {truncateEthAddress, txTruncateEthAddress} from "../utils/address";
 import abi from "../services/abi.json";
 import {useContractWrite} from "wagmi";
+import {usePopups} from "../components/popup/PopupProvider";
+import Popup from "../components/popup/Popup";
+import Loading from "../components/loading/Loading";
+import {useEffect, useState} from "react";
+import LoadingV2 from "../components/loading/LoadingV2";
 
 const DetailContainer: React.FC<{title: string; data: string}> = ({
   title,
@@ -145,20 +150,32 @@ const UserCard: React.FC<{rank: number}> = ({rank}) => {
 };
 
 const MintNFT: React.FC<{}> = ({}) => {
-  const {data, isLoading, isSuccess, write} = useContractWrite({
+  const {addPopup, removePopup} = usePopups();
+  const [loading, setLoading] = useState(false);
+  const [notiContent, setNotiContent] = useState("");
+
+  const {data, isLoading, isSuccess, write, status, isIdle} = useContractWrite({
     address: process.env.REACT_APP_NFT_CONTRACT_ADDRESS! as any,
     abi: abi,
     functionName: "safeMint",
   });
-  console.log("7s2:b", isLoading);
-  console.log("7s2:c", isSuccess);
-  console.log("7s2:d", data);
+  useEffect(() => {
+    if (data?.hash) {
+      setNotiContent("Submit transaction success!");
+      setLoading(false);
+      return;
+    } else {
+      setNotiContent("Something wrong!");
+      setLoading(false);
+      return;
+    }
+  }, [data, isLoading]);
 
   const onHandleMintNFT = () => {
-    // const a = await balueSMC.totalSupply();
-    // console.log("7s2004:a", a);
+    setLoading(true);
     write();
   };
+
   return (
     <div className=" text-white py-24 px-6">
       <div className="max-w-[1300px] mx-auto flex flex-col justify-between items-center  md:flex md:flex-row ">
@@ -199,10 +216,11 @@ const MintNFT: React.FC<{}> = ({}) => {
               </div>
               <div className="w-full flex justify-center items-center">
                 <button
-                  className="bg-btnprimary w-full text-[20px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl"
+                  className="bg-btnprimary w-full text-[20px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex justify-center items-center"
                   onClick={() => onHandleMintNFT()}
                 >
-                  Mint Now
+                  <LoadingV2 size={20} isLoading={loading} />
+                  {loading === false && " Mint Now"}
                 </button>
               </div>
               <div className="flex justify-center items-center space-x-2">

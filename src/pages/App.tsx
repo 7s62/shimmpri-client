@@ -9,6 +9,7 @@ import {goerli} from "wagmi/chains";
 import {alchemyProvider} from "wagmi/providers/alchemy";
 import {publicProvider} from "wagmi/providers/public";
 import "../styles/main.scss";
+import PopupProvider from "../components/popup/PopupProvider";
 
 const App: React.FC = () => {
   const {chains, publicClient} = configureChains(
@@ -40,7 +41,9 @@ const App: React.FC = () => {
         <RainbowKitProvider chains={chains}>
           <div className="main-body bg-[#110929] w-full leading-6">
             <Header />
-            <Router />
+            <PopupProvider>
+              <Router />
+            </PopupProvider>
             <Footer />
           </div>
         </RainbowKitProvider>
