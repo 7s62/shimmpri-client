@@ -1,5 +1,4 @@
-import {balueSMC} from "../services/smc";
-import {truncateEthAddress, txTruncateEthAddress} from "../utils/address";
+import { truncateEthAddress, txTruncateEthAddress } from "../utils/address";
 import abi from "../services/abi.json";
 import {
   useAccount,
@@ -7,32 +6,32 @@ import {
   useContractWrite,
   useWaitForTransaction,
 } from "wagmi";
-import {usePopups} from "../components/popup/PopupProvider";
+import { usePopups } from "../components/popup/PopupProvider";
 import Popup from "../components/popup/Popup";
-import Loading from "../components/loading/Loading";
-import {Component, useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import LoadingV2 from "../components/loading/LoadingV2";
-import {setToast} from "../components/toast/toastReducer";
-import {useAppDispatch, useAppSelector} from "../redux/store";
-import {Exit} from "@styled-icons/boxicons-regular";
-import {TravelExplore} from "@styled-icons/material-outlined";
-import openInNewTab from "../utils/direct";
-import {getRanks, selectRanks} from "../redux/rank/rank.reducer";
-import {Rank, RankReducer} from "../redux/rank/types";
-import * as dayjs from "dayjs";
+import { setToast } from "../components/toast/toastReducer";
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { Exit } from "@styled-icons/boxicons-regular";
+import { TravelExplore } from "@styled-icons/material-outlined";
+import { getRanks, selectRanks } from "../redux/rank/rank.reducer";
+import { Rank, RankReducer } from "../redux/rank/types";
 import relativeTime from "dayjs/plugin/relativeTime";
-import {sleep} from "../utils/sleep";
-import {createAvatar} from "@dicebear/avatars";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import { sleep } from "../utils/sleep";
+import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-gridy-sprites";
-import {BodyText} from "@styled-icons/bootstrap";
-import {Diamond} from "@styled-icons/ionicons-outline";
+import { Diamond } from "@styled-icons/ionicons-outline";
+import dayjs from "dayjs";
+
 dayjs.extend(relativeTime);
+dayjs.extend(localizedFormat);
 
 const DetailContainer: React.FC<{
   title: string;
   data: any;
   className?: string;
-}> = ({title, data, className}) => {
+}> = ({ title, data, className }) => {
   return (
     <div
       className={`${className} flex-1 flex flex-col justify-center space-y-1 items-center py-2`}
@@ -43,7 +42,7 @@ const DetailContainer: React.FC<{
   );
 };
 
-const LeaderBoardUserItem: React.FC<{rankData: Rank; rank: number}> = ({
+const LeaderBoardUserItem: React.FC<{ rankData: Rank; rank: number }> = ({
   rankData,
   rank,
 }) => {
@@ -71,7 +70,7 @@ const LeaderBoardUserItem: React.FC<{rankData: Rank; rank: number}> = ({
   );
 };
 
-const LeaderBoardItem: React.FC<{rankData: Rank; rank: number}> = ({
+const LeaderBoardItem: React.FC<{ rankData: Rank; rank: number }> = ({
   rankData,
   rank,
 }) => {
@@ -87,7 +86,7 @@ const LeaderBoardItem: React.FC<{rankData: Rank; rank: number}> = ({
   );
 };
 
-const Table: React.FC<{rankRx: RankReducer}> = ({rankRx}) => {
+const Table: React.FC<{ rankRx: RankReducer }> = ({ rankRx }) => {
   const onShowRank = () => {
     let temp = null;
     if (rankRx.ranks.length > 0 && !rankRx.isLoading) {
@@ -132,7 +131,7 @@ const UserCard: React.FC<{
   rank: number;
   rankData: Rank;
   className?: string;
-}> = ({rank, rankData, className}) => {
+}> = ({ rank, rankData, className }) => {
   const getRankImg = () => {
     if (rank === 1) {
       return "/yellow.png";
@@ -154,7 +153,7 @@ const UserCard: React.FC<{
   };
   return (
     <div
-      className={`${className} cursor-pointer max-w-2xl mx-2 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-8 bg-white shadow-xl rounded-lg text-gray-900 bg-gray-200`}
+      className={`${className} cursor-pointer max-w-2xl mx-2 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-8 shadow-xl rounded-lg text-gray-900 bg-gray-200`}
     >
       <div className="rounded-t-lg h-24 overflow-hidden relative">
         <img
@@ -198,10 +197,10 @@ const UserCard: React.FC<{
 
 const MintNFT: React.FC<{}> = ({}) => {
   const [loading, setLoading] = useState(false);
-  const {addPopup, removeAll} = usePopups();
+  const { addPopup, removeAll } = usePopups();
   const [nftID, setNFTID] = useState("99999999");
   const dispatch = useAppDispatch();
-  const {address, isConnecting, isDisconnected} = useAccount();
+  const { address, isConnecting, isDisconnected } = useAccount();
   const rankRx = useAppSelector(selectRanks);
   const [haveNFT, setHaveNFT] = useState(false);
 
@@ -336,7 +335,7 @@ const MintNFT: React.FC<{}> = ({}) => {
     functionName: "mintPerDay",
   });
 
-  const {} = useContractRead({
+  useContractRead({
     address: import.meta.env.VITE_NFT_CONTRACT_ADDRESS! as any,
     abi: abi,
     functionName: "tokenURI",
@@ -604,4 +603,5 @@ const MintNFT: React.FC<{}> = ({}) => {
     </div>
   );
 };
+
 export default MintNFT;
