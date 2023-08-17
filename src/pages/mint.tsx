@@ -4,6 +4,7 @@ import {
   useAccount,
   useContractRead,
   useContractWrite,
+  useNetwork,
   useWaitForTransaction,
 } from "wagmi";
 import { usePopups } from "../components/popup/PopupProvider";
@@ -178,10 +179,10 @@ const UserCard: React.FC<{
         <p className="text-black font-bold">{rankData.point} points</p>
       </div>
       <ul className="py-4 mt-2 text-gray-700 flex items-center justify-around">
-        <li className="flex flex-col items-center justify-around">
+        {/* <li className="flex flex-col items-center justify-around">
           <div>Streak</div>
           <div className="font-bold">2</div>
-        </li>
+        </li> */}
         <li className="flex flex-col items-center justify-between">
           <div>Minted</div>
           <div className="font-bold">{rankData.count}</div>
@@ -203,6 +204,8 @@ const MintNFT: React.FC<{}> = ({}) => {
   const { address, isConnecting, isDisconnected } = useAccount();
   const rankRx = useAppSelector(selectRanks);
   const [haveNFT, setHaveNFT] = useState(false);
+
+  const { chain, chains } = useNetwork();
 
   const {
     data: mintData,
@@ -493,8 +496,9 @@ const MintNFT: React.FC<{}> = ({}) => {
                   disabled={address ? false : true}
                 >
                   <LoadingV2 size={30} isLoading={loading} />
-                  {loading === false && address && " Mint Now"}
-                  {!address && "Connect wallet to mint NFT"}
+                  {loading === false && address && !chain?.unsupported
+                    ? " Mint Now"
+                    : "Connect wallet to mint NFT"}
                 </button>
               </div>
             </div>
