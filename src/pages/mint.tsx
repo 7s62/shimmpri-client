@@ -1,5 +1,5 @@
-import {balueSMC} from "../services/smc";
-import {truncateEthAddress, txTruncateEthAddress} from "../utils/address";
+import { balueSMC } from "../services/smc";
+import { truncateEthAddress, txTruncateEthAddress } from "../utils/address";
 import abi from "../services/abi.json";
 import {
   useAccount,
@@ -7,21 +7,21 @@ import {
   useContractWrite,
   useWaitForTransaction,
 } from "wagmi";
-import {usePopups} from "../components/popup/PopupProvider";
+import { usePopups } from "../components/popup/PopupProvider";
 import Popup from "../components/popup/Popup";
 import Loading from "../components/loading/Loading";
-import {Component, useEffect, useState} from "react";
+import { Component, useEffect, useState } from "react";
 import LoadingV2 from "../components/loading/LoadingV2";
-import {setToast} from "../components/toast/toastReducer";
-import {useAppDispatch} from "../redux/store";
-import {Exit} from "@styled-icons/boxicons-regular";
-import {TravelExplore} from "@styled-icons/material-outlined";
+import { setToast } from "../components/toast/toastReducer";
+import { useAppDispatch } from "../redux/store";
+import { Exit } from "@styled-icons/boxicons-regular";
+import { TravelExplore } from "@styled-icons/material-outlined";
 import openInNewTab from "../utils/direct";
 const DetailContainer: React.FC<{
   title: string;
   data: string;
   className?: string;
-}> = ({title, data, className}) => {
+}> = ({ title, data, className }) => {
   return (
     <div
       className={`${className} flex-1 flex flex-col justify-center items-center`}
@@ -100,7 +100,7 @@ const Table: React.FC<{}> = () => {
   );
 };
 
-const UserCard: React.FC<{rank: number}> = ({rank}) => {
+const UserCard: React.FC<{ rank: number }> = ({ rank }) => {
   const getRankImg = () => {
     if (rank === 1) {
       return "/yellow.png";
@@ -163,10 +163,10 @@ const UserCard: React.FC<{rank: number}> = ({rank}) => {
 
 const MintNFT: React.FC<{}> = ({}) => {
   const [loading, setLoading] = useState(false);
-  const {addPopup, removeAll} = usePopups();
+  const { addPopup, removeAll } = usePopups();
   const [nftID, setNFTID] = useState("99999999");
   const dispatch = useAppDispatch();
-  const {address, isConnecting, isDisconnected} = useAccount();
+  const { address, isConnecting, isDisconnected } = useAccount();
 
   const {
     data: mintData,
@@ -175,7 +175,7 @@ const MintNFT: React.FC<{}> = ({}) => {
     write,
     status,
   } = useContractWrite({
-    address: process.env.REACT_APP_NFT_CONTRACT_ADDRESS! as any,
+    address: import.meta.env.VITE_NFT_CONTRACT_ADDRESS! as any,
     abi: abi,
     functionName: "safeMint",
   });
@@ -190,7 +190,7 @@ const MintNFT: React.FC<{}> = ({}) => {
   // console.log("7s200:txnData", txnData, isTxnLoading, isError);
 
   const {} = useContractRead({
-    address: process.env.REACT_APP_NFT_CONTRACT_ADDRESS! as any,
+    address: import.meta.env.VITE_NFT_CONTRACT_ADDRESS! as any,
     abi: abi,
     functionName: "tokenURI",
     args: [nftID],
