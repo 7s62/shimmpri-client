@@ -1,5 +1,5 @@
 {
-  "name": "bridge",
+  "name": "balue-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -29,6 +29,8 @@
     "@web3modal/html": "^2.7.1",
     "@web3modal/react": "^2.7.1",
     "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "dotenv-cli": "^7.3.0",
     "ethers": "v5",
     "joi": "^17.9.2",
     "postcss": "^8.4.26",
@@ -51,7 +53,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:staging": "dotenv -e .env.staging pnpm build",
+    "build:production": "dotenv -e .env.production pnpm build"
   },
   "eslintConfig": {
     "extends": [
