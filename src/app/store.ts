@@ -2,11 +2,13 @@
 
 import {Action, configureStore, ThunkAction} from "@reduxjs/toolkit";
 import toastReducer from "../components/toast/toastReducer";
+import rankReducer from "../redux/rank/rank.reducer";
 
 const createStore = () => {
   return configureStore({
     reducer: {
       toast: toastReducer,
+      ranks: rankReducer,
     },
   });
 };
