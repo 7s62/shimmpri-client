@@ -143,17 +143,18 @@ const UserCard: React.FC<{
     return "/green.png";
   };
   const getBg = () => {
-    if (rank === 1) {
-      return "/yellow-bg.png";
-    }
-    if (rank === 2) {
-      return "/red-bg.png";
-    }
-    return "/green-bg.png";
+    // if (rank === 1) {
+    //   return "/yellow-bg.png";
+    // }
+    // if (rank === 2) {
+    //   return "/red-bg.png";
+    // }
+    // return "/green-bg.png";
+    return "/yellow-bg.png";
   };
   return (
     <div
-      className={`${className} max-w-2xl mx-2 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-8 bg-white shadow-xl rounded-lg text-gray-900`}
+      className={`${className} cursor-pointer max-w-2xl mx-2 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-8 bg-white shadow-xl rounded-lg text-gray-900 bg-gray-200`}
     >
       <div className="rounded-t-lg h-24 overflow-hidden relative">
         <img
