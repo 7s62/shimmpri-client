@@ -54,8 +54,7 @@ const Header: React.FC<{}> = () => {
           </a>
         </div>
         {/* Wallet */}
-
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden md:flex md:justify-end lg:flex lg:flex-1 lg:justify-end">
           <ConnectButton />
         </div>
         <div

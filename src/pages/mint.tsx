@@ -187,6 +187,7 @@ const MintNFT: React.FC<{}> = ({}) => {
   const dispatch = useAppDispatch();
   const {address, isConnecting, isDisconnected} = useAccount();
   const rankRx = useAppSelector(selectRanks);
+  const [haveNFT, setHaveNFT] = useState(false);
 
   const {
     data: mintData,
@@ -209,95 +210,90 @@ const MintNFT: React.FC<{}> = ({}) => {
   });
   // console.log("7s200:txnData", txnData, isTxnLoading, isError);
 
+  function fetchNFTData(data: any) {
+    fetch(data)
+      .then(async (res: any) => {
+        console.log("7s200:res", res);
+        const nftDetail = await res.json();
+        addPopup({
+          Component: () => {
+            return (
+              <Popup className="bg-white">
+                <h2 className="text-center font-bold text-[24px] leading-[28px] ">
+                  Congratulation!
+                </h2>
+                <div className="px-3 mb-2 mt-8 border-b-[1px] border-gray-300">
+                  <div className="flex flex-col justify-center items-center space-y-2">
+                    <img
+                      className="w-[200px] h-[200px]"
+                      src={nftDetail.image}
+                      alt="nftimg"
+                    />
+                    <div className="text-[18px] font-semibold">
+                      {nftDetail.name}
+                    </div>
+                  </div>
+                  <div className="flex justify-center items-center space-x-2 !text-gray-900 mx-16 my-4 p-2">
+                    <DetailContainer
+                      className="font-bold"
+                      title="Level"
+                      data={nftDetail.attributes[0].value}
+                    />
+                    <DetailContainer
+                      className="font-bold"
+                      title="Point"
+                      data={nftDetail.attributes[1].value}
+                    />
+                    <DetailContainer
+                      className="font-bold"
+                      title="Day"
+                      data={nftDetail.attributes[2].value}
+                    />
+                  </div>
+                </div>
+                <div className="w-full flex justify-between items-center !text-white">
+                  <button
+                    onClick={() => {
+                      console.log("7s200", mintData?.hash);
+                      window.open(
+                        `https://goerli.etherscan.io/tx/${mintData?.hash}`,
+                        "_blank",
+                        "noopener,noreferrer"
+                      );
+                    }}
+                    className="flex-1 bg-tao max-w-[200px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
+                  >
+                    <p>View on explore</p>
+                    <TravelExplore size={20} />
+                  </button>
+                  <button
+                    onClick={() => removeAll()}
+                    className="flex-1 bg-tao max-w-[200px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
+                  >
+                    <p>Back to mint</p>
+                    <Exit size={20} />
+                  </button>
+                </div>
+              </Popup>
+            );
+          },
+        });
+        setHaveNFT(true);
+        return;
+      })
+      .catch((err) => {
+        console.log("7s200:err", err);
+        fetchNFTData(data);
+      });
+  }
+
   const {} = useContractRead({
     address: import.meta.env.VITE_NFT_CONTRACT_ADDRESS! as any,
     abi: abi,
     functionName: "tokenURI",
     args: [nftID],
     onSuccess: (data: any) => {
-      console.log("7s2004:data", data);
-      fetch(data)
-        .then(async (res: any) => {
-          const nftDetail = await res.json();
-          console.log("7s200", nftDetail.attributes);
-          addPopup({
-            Component: () => {
-              return (
-                <Popup className="bg-white">
-                  <h2 className="text-center font-bold text-[24px] leading-[28px] ">
-                    Congratulation!
-                  </h2>
-                  <div className="px-3 mb-2 mt-8 border-b-[1px] border-gray-300">
-                    <div className="flex flex-col justify-center items-center space-y-2">
-                      <img
-                        className="w-[200px] h-[200px]"
-                        src={nftDetail.image}
-                        alt="nftimg"
-                      />
-                      <div className="text-[18px] font-semibold">
-                        {nftDetail.name}
-                      </div>
-                    </div>
-                    <div className="flex justify-center items-center space-x-2 !text-gray-900 mx-16 my-4 p-2">
-                      <DetailContainer
-                        className="font-bold"
-                        title="Level"
-                        data={nftDetail.attributes[0].value}
-                      />
-                      <DetailContainer
-                        className="font-bold"
-                        title="Point"
-                        data={nftDetail.attributes[1].value}
-                      />
-                      <DetailContainer
-                        className="font-bold"
-                        title="Day"
-                        data={nftDetail.attributes[2].value}
-                      />
-                    </div>
-                  </div>
-                  <div className="w-full flex justify-between items-center !text-white">
-                    <button
-                      onClick={() => {
-                        console.log("7s200", mintData?.hash);
-                        window.open(
-                          `https://goerli.etherscan.io/tx/${mintData?.hash}`,
-                          "_blank",
-                          "noopener,noreferrer"
-                        );
-                      }}
-                      className="flex-1 bg-tao max-w-[200px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
-                    >
-                      <p>View on explore</p>
-                      <TravelExplore size={20} />
-                    </button>
-                    <button
-                      onClick={() => removeAll()}
-                      className="flex-1 bg-tao max-w-[200px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
-                    >
-                      <p>Back to mint</p>
-                      <Exit size={20} />
-                    </button>
-                  </div>
-                </Popup>
-              );
-            },
-          });
-          return;
-        })
-        .catch((err) => {
-          console.log("7s200:err", err);
-          dispatch(
-            setToast({
-              show: true,
-              title: "",
-              message: `Something wrong!`,
-              type: "error",
-            })
-          );
-          setLoading(false);
-          return;
-        });
+      fetchNFTData(data);
     },
   });
 
@@ -341,28 +337,31 @@ const MintNFT: React.FC<{}> = ({}) => {
     <div className=" text-white py-24 px-6">
       <div className="max-w-[1300px] space-x-2 mx-auto flex flex-col justify-between items-center  md:flex md:flex-row ">
         <div className="flex-1 flex flex-col justify-center items-center">
-          <h1 className="text-[80px] leading-[80px] font-extrabold">
-            <p>Create your</p>
-            <p className="inline-block">Own</p>
-            <span className="text-tao">NFT Dream</span>
-            <p>Gallery</p>
+          <h1 className="text-[50px] leading-[50px] font-extrabold">
+            <p>Balue - Present your Value</p>
+            <p className="">
+              in <span className="text-tao">Base</span> <span>this summer</span>
+            </p>
           </h1>
-          <div className="flex justify-center items-center space-x-6 py-6">
+          <div className="flex flex-col space-y-2 lg:flex lg:flex-row justify-center items-center space-x-6 py-6">
             <p className="text-[28px] leading-[21px] font-extrabold text-tao">
-              Skyline
+              Balue
             </p>
             <p className="text-[16px] leading-[26px]">
               <p>
-                The Larges NFT Collection. Automatic and truly unique digital
+                - We believe that each NFT artwork represents the creativity and
+                soul of the creator, and this deserves to be clearly expressed.
               </p>
               <p>
-                creation. Signed and issued by the creator, made possible by
+                - The POINT of each NFT will be displayed in the order the users
+                mint them, and there will be a leaderboard for POINT’s owners,
+                and we will have rewards for the top 5 users with the highest
+                points.
               </p>
-              <p> blockchain technologi</p>
             </p>
           </div>
         </div>
-        <div className="flex justify-center items-center">
+        <div className="flex flex-1 justify-center items-center">
           <div>
             <img
               className="max-w-[388px] max-h-[463px]  boder-none rounded-xl"
