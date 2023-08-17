@@ -116,7 +116,10 @@ const Table: React.FC<{rankRx: RankReducer}> = ({rankRx}) => {
   );
 };
 
-const UserCard: React.FC<{rank: number}> = ({rank}) => {
+const UserCard: React.FC<{rank: number; rankData: Rank}> = ({
+  rank,
+  rankData,
+}) => {
   const getRankImg = () => {
     if (rank === 1) {
       return "/yellow.png";
@@ -155,9 +158,9 @@ const UserCard: React.FC<{rank: number}> = ({rank}) => {
       />
       <div className="text-center mt-2">
         <h2 className="font-semibold text-[12px]">
-          {truncateEthAddress("0xfa2f024ca4c002b4859868524ebb28c686da2894")}
+          {truncateEthAddress(rankData.address)}
         </h2>
-        <p className="text-black font-bold">120 points</p>
+        <p className="text-black font-bold">{rankData.point} points</p>
       </div>
       <ul className="py-4 mt-2 text-gray-700 flex items-center justify-around">
         <li className="flex flex-col items-center justify-around">
@@ -170,7 +173,7 @@ const UserCard: React.FC<{rank: number}> = ({rank}) => {
         </li>
         <li className="flex flex-col items-center justify-around">
           <div>Point</div>
-          <div>15</div>
+          <div>{rankData.point}</div>
         </li>
       </ul>
     </div>
@@ -327,7 +330,7 @@ const MintNFT: React.FC<{}> = ({}) => {
 
   useEffect(() => {
     dispatch(getRanks());
-  }, []);
+  }, [mintData, txnData]);
 
   const onHandleMintNFT = () => {
     setLoading(true);
@@ -400,20 +403,32 @@ const MintNFT: React.FC<{}> = ({}) => {
           <h2 className="text-center text-[24px] leading-[24px] font-bold">
             Top 3 Ranking
           </h2>
-          <div className="max-w-[800px] mx-auto flex flex-col space-x-2 justify-center items-center md:flex md:flex-row ">
-            <div className="hidden md:block">
-              <UserCard rank={2} />
+          {!rankRx.isLoading && rankRx.ranks.length > 0 ? (
+            <div className="max-w-[800px] mx-auto flex flex-col space-x-2 justify-center items-center md:flex md:flex-row ">
+              <div className="hidden md:block">
+                {rankRx.ranks[1] && (
+                  <UserCard rank={2} rankData={rankRx.ranks[1]} />
+                )}
+              </div>
+              <div>
+                {rankRx.ranks[0] && (
+                  <UserCard rank={1} rankData={rankRx.ranks[0]} />
+                )}
+              </div>
+              <div className="block md:hidden">
+                {rankRx.ranks[1] && (
+                  <UserCard rank={2} rankData={rankRx.ranks[1]} />
+                )}
+              </div>
+              <div>
+                {rankRx.ranks[2] && (
+                  <UserCard rank={3} rankData={rankRx.ranks[2]} />
+                )}
+              </div>
             </div>
-            <div>
-              <UserCard rank={1} />
-            </div>
-            <div className="block md:hidden">
-              <UserCard rank={2} />
-            </div>
-            <div>
-              <UserCard rank={3} />
-            </div>
-          </div>
+          ) : (
+            <LoadingV2 isLoading={rankRx.isLoading} />
+          )}
         </div>
 
         <div className="">
