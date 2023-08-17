@@ -25,6 +25,7 @@ import {sleep} from "../utils/sleep";
 import {createAvatar} from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-gridy-sprites";
 import {BodyText} from "@styled-icons/bootstrap";
+import {Diamond} from "@styled-icons/ionicons-outline";
 dayjs.extend(relativeTime);
 
 const DetailContainer: React.FC<{
@@ -127,10 +128,11 @@ const Table: React.FC<{rankRx: RankReducer}> = ({rankRx}) => {
   );
 };
 
-const UserCard: React.FC<{rank: number; rankData: Rank}> = ({
-  rank,
-  rankData,
-}) => {
+const UserCard: React.FC<{
+  rank: number;
+  rankData: Rank;
+  className?: string;
+}> = ({rank, rankData, className}) => {
   const getRankImg = () => {
     if (rank === 1) {
       return "/yellow.png";
@@ -150,7 +152,9 @@ const UserCard: React.FC<{rank: number; rankData: Rank}> = ({
     return "/green-bg.png";
   };
   return (
-    <div className="max-w-2xl mx-2 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-8 bg-white shadow-xl rounded-lg text-gray-900">
+    <div
+      className={`${className} max-w-2xl mx-2 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-8 bg-white shadow-xl rounded-lg text-gray-900`}
+    >
       <div className="rounded-t-lg h-24 overflow-hidden relative">
         <img
           className="object-cover object-top w-full"
@@ -236,7 +240,7 @@ const MintNFT: React.FC<{}> = ({}) => {
                 <div className="px-3 mb-2 mt-8 border-b-[1px] border-gray-300">
                   <div className="flex flex-col justify-center items-center space-y-2">
                     <img
-                      className="w-[200px] h-[200px]"
+                      className="w-[200px] h-[200px] border border-none rounded-2xl"
                       src={nftDetail.image}
                       alt="nftimg"
                     />
@@ -430,9 +434,10 @@ const MintNFT: React.FC<{}> = ({}) => {
             </div>
 
             <div className="flex justify-between items-center max-w-[350px] bg-tao py-2 px-4 border border-none rounded-xl">
-              <div>
+              <div className="flex justify-center items-center space-x-1">
+                <Diamond size={24} />
                 <span>300</span>
-                <span className="font-bold"> NFTs</span> upcoming
+                <span className="font-bold"> NFTs </span> <span>upcoming</span>
               </div>
               <p className="font-extrabold">
                 {startTimeData && !isErrorStartTime && !isLoadingStartTime ? (
@@ -540,12 +545,20 @@ const MintNFT: React.FC<{}> = ({}) => {
             <div className="max-w-[800px] mx-auto flex flex-col space-x-2 justify-center items-center md:flex md:flex-row ">
               <div className="hidden md:block">
                 {rankRx.ranks[1] && (
-                  <UserCard rank={2} rankData={rankRx.ranks[1]} />
+                  <UserCard
+                    className="md:max-w-[250px] lg:max-w-[250px]"
+                    rank={2}
+                    rankData={rankRx.ranks[1]}
+                  />
                 )}
               </div>
               <div>
                 {rankRx.ranks[0] && (
-                  <UserCard rank={1} rankData={rankRx.ranks[0]} />
+                  <UserCard
+                    className="md:max-w-[280px] lg:max-w-[280px] md:mb-12 lg:mb-12"
+                    rank={1}
+                    rankData={rankRx.ranks[0]}
+                  />
                 )}
               </div>
               <div className="block md:hidden">
@@ -555,7 +568,11 @@ const MintNFT: React.FC<{}> = ({}) => {
               </div>
               <div>
                 {rankRx.ranks[2] && (
-                  <UserCard rank={3} rankData={rankRx.ranks[2]} />
+                  <UserCard
+                    className="md:max-w-[250px] lg:max-w-[250px]"
+                    rank={3}
+                    rankData={rankRx.ranks[2]}
+                  />
                 )}
               </div>
             </div>
