@@ -13,11 +13,12 @@ import Loading from "../components/loading/Loading";
 import {Component, useEffect, useState} from "react";
 import LoadingV2 from "../components/loading/LoadingV2";
 import {setToast} from "../components/toast/toastReducer";
-import {useAppDispatch} from "../redux/store";
+import {useAppDispatch, useAppSelector} from "../redux/store";
 import {Exit} from "@styled-icons/boxicons-regular";
 import {TravelExplore} from "@styled-icons/material-outlined";
 import openInNewTab from "../utils/direct";
-import {getRanks} from "../redux/rank/rank.reducer";
+import {getRanks, selectRanks} from "../redux/rank/rank.reducer";
+import {Rank, RankReducer} from "../redux/rank/types";
 
 const DetailContainer: React.FC<{
   title: string;
@@ -34,7 +35,10 @@ const DetailContainer: React.FC<{
   );
 };
 
-const LeaderBoardUserItem: React.FC<{}> = () => {
+const LeaderBoardUserItem: React.FC<{rankData: Rank; rank: number}> = ({
+  rankData,
+  rank,
+}) => {
   return (
     <div className="flex flex-start">
       <div className="flex justify-center items-center space-x-2">
@@ -45,9 +49,9 @@ const LeaderBoardUserItem: React.FC<{}> = () => {
         />
         <div className="font-normal text-[12px] flex flex-col">
           <p className="text-gray-300">
-            {txTruncateEthAddress("0xd01d903011fd0dfd473220994c6fca9755848c22")}
+            {txTruncateEthAddress(rankData.address)}
           </p>
-          <p className="font-semibold text-white">#1</p>
+          <p className="font-semibold text-white">#{rank + 1}</p>
         </div>
       </div>
       <div></div>
@@ -55,20 +59,32 @@ const LeaderBoardUserItem: React.FC<{}> = () => {
   );
 };
 
-const LeaderBoardItem: React.FC<{}> = () => {
+const LeaderBoardItem: React.FC<{rankData: Rank; rank: number}> = ({
+  rankData,
+  rank,
+}) => {
   return (
     <tr className="bg-[#251163] w-full border border-none rounded-xl text-gray-300">
       <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        <LeaderBoardUserItem />
+        <LeaderBoardUserItem rankData={rankData} rank={rank} />
       </td>
       <td className="px-4 py-3 text-center">30</td>
-      <td className="px-4 py-3 text-center">19</td>
+      <td className="px-4 py-3 text-center">{rankData.point}</td>
       <td className="px-4 py-3 text-center">3</td>
     </tr>
   );
 };
 
-const Table: React.FC<{}> = () => {
+const Table: React.FC<{rankRx: RankReducer}> = ({rankRx}) => {
+  const onShowRank = () => {
+    let temp = null;
+    if (rankRx.ranks.length > 0 && !rankRx.isLoading) {
+      temp = rankRx.ranks.map((e, i) => {
+        return <LeaderBoardItem key={e.address} rankData={e} rank={i} />;
+      });
+    }
+    return temp;
+  };
   return (
     <div className="relative overflow-x-auto max-w-[900px] mx-auto border border-none rounded-xl">
       <table className="w-full text-sm !text-white">
@@ -89,13 +105,11 @@ const Table: React.FC<{}> = () => {
           </tr>
         </thead>
         <tbody>
-          <LeaderBoardItem />
-          <LeaderBoardItem />
-          <LeaderBoardItem />
-          <LeaderBoardItem />
-          <LeaderBoardItem />
-          <LeaderBoardItem />
-          <LeaderBoardItem />
+          {rankRx.isLoading ? (
+            <LoadingV2 isLoading={rankRx.isLoading} />
+          ) : (
+            onShowRank()
+          )}
         </tbody>
       </table>
     </div>
@@ -169,6 +183,7 @@ const MintNFT: React.FC<{}> = ({}) => {
   const [nftID, setNFTID] = useState("99999999");
   const dispatch = useAppDispatch();
   const {address, isConnecting, isDisconnected} = useAccount();
+  const rankRx = useAppSelector(selectRanks);
 
   const {
     data: mintData,
@@ -405,7 +420,7 @@ const MintNFT: React.FC<{}> = ({}) => {
           <h2 className="text-center text-[24px] leading-[24px] font-bold pb-4">
             Ranking
           </h2>
-          <Table />
+          <Table rankRx={rankRx} />
         </div>
       </div>
     </div>

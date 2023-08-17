@@ -78,7 +78,7 @@
     "web3-validator": "1.0.2"
   },
   "scripts": {
-    "start": "vite",
+    "start": "vite --port 8080",
     "build": "vite build",
     "build:staging": "dotenv -e .env.staging pnpm build",
     "build:production": "dotenv -e .env.production pnpm build",
