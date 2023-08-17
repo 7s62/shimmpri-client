@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@dicebear/avatars": "^4.10.8",
+    "@dicebear/avatars-gridy-sprites": "^4.10.8",
     "@metamask/detect-provider": "^2.0.0",
     "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-popover": "1.0.6",
@@ -34,6 +36,7 @@
     "@web3modal/html": "^2.7.1",
     "@web3modal/react": "^2.7.1",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.47.0",

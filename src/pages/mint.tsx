@@ -19,18 +19,25 @@ import {TravelExplore} from "@styled-icons/material-outlined";
 import openInNewTab from "../utils/direct";
 import {getRanks, selectRanks} from "../redux/rank/rank.reducer";
 import {Rank, RankReducer} from "../redux/rank/types";
+import * as dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import {sleep} from "../utils/sleep";
+import {createAvatar} from "@dicebear/avatars";
+import * as style from "@dicebear/avatars-gridy-sprites";
+import {BodyText} from "@styled-icons/bootstrap";
+dayjs.extend(relativeTime);
 
 const DetailContainer: React.FC<{
   title: string;
-  data: string;
+  data: any;
   className?: string;
 }> = ({title, data, className}) => {
   return (
     <div
-      className={`${className} flex-1 flex flex-col justify-center items-center`}
+      className={`${className} flex-1 flex flex-col justify-center space-y-1 items-center py-2`}
     >
-      <div className="">{title}</div>
-      <p>{data}</p>
+      <div className="w-full text-center">{title}</div>
+      <p className="text-[16px] leading-[20px] font-bold">{data}</p>
     </div>
   );
 };
@@ -42,10 +49,14 @@ const LeaderBoardUserItem: React.FC<{rankData: Rank; rank: number}> = ({
   return (
     <div className="flex flex-start">
       <div className="flex justify-center items-center space-x-2">
-        <img
-          className="max-w-[40px] max-h-[40px]  boder-none rounded-xl"
-          src="https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/90234375_831684853993938_3886786635118936064_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=AWy0Fglj4aQAX-u3dLV&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfDZGFraiPAk3cx0kbuMCGuu7Wpk5uAXdswyJEidMqhz9g&oe=6501E675"
-          alt="nft"
+        <div
+          dangerouslySetInnerHTML={{
+            __html: createAvatar(style, {
+              seed: rankData.address,
+              w: 40,
+              h: 40,
+            }),
+          }}
         />
         <div className="font-normal text-[12px] flex flex-col">
           <p className="text-gray-300">
@@ -68,9 +79,9 @@ const LeaderBoardItem: React.FC<{rankData: Rank; rank: number}> = ({
       <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
         <LeaderBoardUserItem rankData={rankData} rank={rank} />
       </td>
-      <td className="px-4 py-3 text-center">30</td>
+      <td className="px-4 py-3 text-center">{rankData.count}</td>
       <td className="px-4 py-3 text-center">{rankData.point}</td>
-      <td className="px-4 py-3 text-center">3</td>
+      {/* <td className="px-4 py-3 text-center">3</td> */}
     </tr>
   );
 };
@@ -99,9 +110,9 @@ const Table: React.FC<{rankRx: RankReducer}> = ({rankRx}) => {
             <th scope="col" className="px-6 py-3 text-center">
               Total Point
             </th>
-            <th scope="col" className="px-6 py-3 text-center">
+            {/* <th scope="col" className="px-6 py-3 text-center">
               Mint Streak
-            </th>
+            </th> */}
           </tr>
         </thead>
         <tbody>
@@ -146,7 +157,7 @@ const UserCard: React.FC<{rank: number; rankData: Rank}> = ({
           src={getBg()}
           alt="Mountain"
         />
-        <p className="text-[42px] top-2 left-2 absolute italic font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 w-[100px] h-[100px]">
+        <p className="text-[30px] top-2 left-2 absolute italic font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 w-[100px] h-[100px]">
           #{rank}
         </p>
       </div>
@@ -165,15 +176,15 @@ const UserCard: React.FC<{rank: number; rankData: Rank}> = ({
       <ul className="py-4 mt-2 text-gray-700 flex items-center justify-around">
         <li className="flex flex-col items-center justify-around">
           <div>Streak</div>
-          <div>2</div>
+          <div className="font-bold">2</div>
         </li>
         <li className="flex flex-col items-center justify-between">
           <div>Minted</div>
-          <div>10k</div>
+          <div className="font-bold">{rankData.count}</div>
         </li>
         <li className="flex flex-col items-center justify-around">
           <div>Point</div>
-          <div>{rankData.point}</div>
+          <div className="font-bold">{rankData.point}</div>
         </li>
       </ul>
     </div>
@@ -282,10 +293,43 @@ const MintNFT: React.FC<{}> = ({}) => {
         return;
       })
       .catch((err) => {
-        console.log("7s200:err", err);
-        fetchNFTData(data);
+        sleep(3000).then(() => {
+          fetchNFTData(data);
+          setLoading(false);
+        });
       });
   }
+
+  const {
+    data: currentDayData,
+    isLoading: isLoadingCurrentDay,
+    isError: isErrorCurrentDay,
+  } = useContractRead({
+    address: import.meta.env.VITE_NFT_CONTRACT_ADDRESS! as any,
+    abi: abi,
+    functionName: "currentDay",
+  });
+
+  const {
+    data: startTimeData,
+    isLoading: isLoadingStartTime,
+    isError: isErrorStartTime,
+  } = useContractRead({
+    address: import.meta.env.VITE_NFT_CONTRACT_ADDRESS! as any,
+    abi: abi,
+    functionName: "startTime",
+  });
+
+  const {
+    data: mintPerDayData,
+    isLoading: isLoadingMintPerDay,
+    isError: isErrorMintPerDay,
+  } = useContractRead({
+    address: import.meta.env.VITE_NFT_CONTRACT_ADDRESS! as any,
+    abi: abi,
+    args: [currentDayData],
+    functionName: "mintPerDay",
+  });
 
   const {} = useContractRead({
     address: import.meta.env.VITE_NFT_CONTRACT_ADDRESS! as any,
@@ -326,7 +370,7 @@ const MintNFT: React.FC<{}> = ({}) => {
 
   useEffect(() => {
     dispatch(getRanks());
-  }, [mintData, txnData]);
+  }, [nftID !== "99999999"]);
 
   const onHandleMintNFT = () => {
     setLoading(true);
@@ -335,44 +379,107 @@ const MintNFT: React.FC<{}> = ({}) => {
 
   return (
     <div className=" text-white py-24 px-6">
-      <div className="max-w-[1300px] space-x-2 mx-auto flex flex-col justify-between items-center  md:flex md:flex-row ">
-        <div className="flex-1 flex flex-col justify-center items-center">
+      <div className=" max-w-[1300px] space-x-2 mx-auto flex flex-col justify-between items-center  md:flex md:flex-row space-x-12">
+        <div className="px-6 lg:px-0 my-8 flex-1 flex flex-col justify-center">
           <h1 className="text-[50px] leading-[50px] font-extrabold">
-            <p>Balue - Present your Value</p>
+            <p className="text-left">Balue - Present your Value</p>
             <p className="">
               in <span className="text-tao">Base</span> <span>this summer</span>
             </p>
           </h1>
           <div className="flex flex-col space-y-2 lg:flex lg:flex-row justify-center items-center space-x-6 py-6">
-            <p className="text-[28px] leading-[21px] font-extrabold text-tao">
+            {/* <p className="text-[28px] leading-[21px] font-extrabold text-tao">
               Balue
-            </p>
-            <p className="text-[16px] leading-[26px]">
-              <p>
-                - We believe that each NFT artwork represents the creativity and
+            </p> */}
+            <div className="text-[16px] leading-[26px]">
+              <p className="pb-6">
+                We believe that each NFT artwork represents the creativity and
                 soul of the creator, and this deserves to be clearly expressed.
               </p>
               <p>
-                - The POINT of each NFT will be displayed in the order the users
+                The POINT of each NFT will be displayed in the order the users
                 mint them, and there will be a leaderboard for POINT’s owners,
                 and we will have rewards for the top 5 users with the highest
                 points.
               </p>
-            </p>
+            </div>
+          </div>
+          <div className="flex flex-col space-y-2">
+            <div className="flex justify-between items-center max-w-[350px] bg-gray-200 text-black py-2 px-4 border border-none rounded-xl">
+              <div className="font-bold">Ended time remaining</div>
+              <p className="font-bold">
+                {startTimeData && !isErrorStartTime && !isLoadingStartTime ? (
+                  dayjs(Number(startTimeData) * 1000)
+                    .add((Number(currentDayData) + 1) * 86400000)
+                    .fromNow(true) + " left"
+                ) : (
+                  // <CountDown
+                  //   duration={dayjs()
+                  //     .millisecond(86400000)
+                  //     .subtract(
+                  //       dayjs(Number(startTimeData) * 1000)
+                  //         .add((Number(currentDayData) + 1) * 86400000)
+                  //         .millisecond(),
+                  //       "millisecond"
+                  //     )
+                  //     .valueOf()}
+                  // />
+                  <LoadingV2 isLoading={isLoadingStartTime} />
+                )}
+              </p>
+            </div>
+
+            <div className="flex justify-between items-center max-w-[350px] bg-tao py-2 px-4 border border-none rounded-xl">
+              <div>
+                <span>300</span>
+                <span className="font-bold"> NFTs</span> upcoming
+              </div>
+              <p className="font-extrabold">
+                {startTimeData && !isErrorStartTime && !isLoadingStartTime ? (
+                  dayjs(Number(startTimeData) * 1000)
+                    .add((Number(currentDayData) + 1) * 86400000)
+                    .fromNow()
+                ) : (
+                  <LoadingV2 isLoading={isLoadingStartTime} />
+                )}
+              </p>
+            </div>
           </div>
         </div>
-        <div className="flex flex-1 justify-center items-center">
+        <div className="flex max-w-[400px] justify-center items-center">
           <div>
             <img
               className="max-w-[388px] max-h-[463px]  boder-none rounded-xl"
-              src="https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/90234375_831684853993938_3886786635118936064_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=AWy0Fglj4aQAX-u3dLV&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfDZGFraiPAk3cx0kbuMCGuu7Wpk5uAXdswyJEidMqhz9g&oe=6501E675"
+              src="/nft.png"
               alt="nft"
             />
             <div className="flex flex-col space-y-3 py-2">
               <div className="flex justify-center items-center space-x-4">
-                <DetailContainer title="Session" data="1" />
-                <DetailContainer title="Remaining" data="240" />
-                <DetailContainer title="Total" data="300" />
+                <DetailContainer
+                  title="Day"
+                  data={
+                    currentDayData &&
+                    !isErrorCurrentDay &&
+                    !isLoadingCurrentDay ? (
+                      (Number(currentDayData) + 1).toString()
+                    ) : (
+                      <LoadingV2 isLoading={isLoadingCurrentDay} />
+                    )
+                  }
+                />
+                <DetailContainer title="Mint Fee" data={"FREE"} />
+                <DetailContainer
+                  title="Supply"
+                  data={
+                    mintPerDayData &&
+                    !isErrorMintPerDay &&
+                    !isLoadingMintPerDay ? (
+                      mintPerDayData.toString() + "/300"
+                    ) : (
+                      <LoadingV2 isLoading={isLoadingMintPerDay} />
+                    )
+                  }
+                />
               </div>
               <div className="w-full flex justify-center items-center">
                 <button
@@ -380,17 +487,44 @@ const MintNFT: React.FC<{}> = ({}) => {
                   onClick={() => onHandleMintNFT()}
                   disabled={address ? false : true}
                 >
-                  <LoadingV2 size={28} isLoading={loading} />
+                  <LoadingV2 size={30} isLoading={loading} />
                   {loading === false && address && " Mint Now"}
                   {!address && "Connect wallet to mint NFT"}
                 </button>
               </div>
-              <div className="flex justify-center items-center space-x-2">
-                <p>End time remaining: </p>
-                <p className="font-bold">{new Date().toISOString()}</p>
-              </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* description */}
+      <div className="max-w-[1000px] mx-auto px-6 py-16">
+        <h2 className="text-[32px] leading-[32px] font-bold my-4 lg:px-20">
+          The limitations of Balue NFT and Minting Process
+        </h2>
+        <div className="text-[18px] leading-[20px] py-4">
+          - In this campaign, we will{" "}
+          <span className="text-tao font-bold">limit</span> the{" "}
+          <span className="text-tao font-bold">quantity of NFT</span> because
+          the NFT value is based on its rarity. The{" "}
+          <span className="text-tao font-bold">higher the score</span> , the{" "}
+          <span className="text-tao font-bold">rarer the NFT.</span>
+        </div>
+        <div className="text-[18px] pb-4">
+          - The event will run for{" "}
+          <span className="text-tao font-bold">2 weeks.</span> During this
+          timeframe, we will conduct{" "}
+          <span className="text-tao font-bold">3 rounds per week.</span> Based
+          on an emphasis on the worth of NFT ownership. We have set a cap of{" "}
+          <span className="text-tao font-bold">300 NFTs</span> that can be{" "}
+          <span className="text-tao font-bold">minted in each round</span> to
+          accommodate the fastest players. This approach ensures uniqueness and
+          scarcity in each successfully minted artwork{" "}
+          <span className="text-tao font-bold">
+            (as represented in the minted NFT's Points)
+          </span>
+          , as well as fostering competition and enthusiasm throughout the
+          participation process.
         </div>
       </div>
 
@@ -436,6 +570,18 @@ const MintNFT: React.FC<{}> = ({}) => {
           </h2>
           <Table rankRx={rankRx} />
         </div>
+      </div>
+
+      <div className="w-full max-w-[1200px] mx-auto px-6 py-16">
+        <div className="bg-[url('/banner.png')] bg-cover bg-center h-[290px] flex flex-col justify-center items-center space-y-6 border border-none rounded-3xl">
+          <h2 className="text-[36px] leading-[36px] font-bold">
+            Join Our Community
+          </h2>
+          <button className="px-6 py-4 bg-white text-blue-500 text-[24px] leading-[24px] border border-none rounded-3xl">
+            Get Started
+          </button>
+        </div>
+        {/* <img className="mx-auto relative" src="/banner.png" alt="banner" /> */}
       </div>
     </div>
   );

@@ -43,7 +43,7 @@ const Header: React.FC<{}> = () => {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12 text-white text-[20px] font-bold">
-          <a href="#" className="text-sm font-semibold leading-6">
+          {/* <a href="#" className="text-sm font-semibold leading-6">
             Mint NFT
           </a>
           <a href="#" className="text-sm font-semibold leading-6">
@@ -51,7 +51,7 @@ const Header: React.FC<{}> = () => {
           </a>
           <a href="#" className="text-sm font-semibold leading-6">
             Contacts
-          </a>
+          </a> */}
         </div>
         {/* Wallet */}
         <div className="hidden md:flex md:justify-end lg:flex lg:flex-1 lg:justify-end">
@@ -83,33 +83,8 @@ const Header: React.FC<{}> = () => {
             </div>
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50"
-                  >
-                    Bridge
-                  </a>
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50"
-                  >
-                    Swap
-                  </a>
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50"
-                  >
-                    Contact
-                  </a>
-                </div>
                 <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-50"
-                  >
-                    Log in
-                  </a>
+                  <ConnectButton />
                 </div>
               </div>
             </div>
