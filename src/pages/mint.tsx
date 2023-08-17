@@ -293,7 +293,7 @@ const MintNFT: React.FC<{}> = ({}) => {
         return;
       })
       .catch((err) => {
-        sleep(3000).then(() => {
+        sleep(5000).then(() => {
           fetchNFTData(data);
           setLoading(false);
         });
