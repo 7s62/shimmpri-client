@@ -1,5 +1,3 @@
-// Copyright (c) Fewcha. All rights reserved.
-
 export type PopupType = {
   title: string;
   content: JSX.Element;

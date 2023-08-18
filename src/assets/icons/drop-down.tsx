@@ -1,6 +1,6 @@
 import cn from "../../services/cn";
 
-export const SelectCoinDropdownOption: React.FC<{className?: string}> = ({
+export const SelectCoinDropdownOption: React.FC<{ className?: string }> = ({
   className,
 }) => {
   return (

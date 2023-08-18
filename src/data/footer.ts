@@ -1,18 +1,22 @@
 export const FOOTER_MENU = [
   {
-    label: "Contributors",
-  },
-  {
     label: "Docs",
+    url: "/",
   },
   {
-    label: "Community",
+    label: "Discord",
+    url: "/",
   },
-
+  {
+    label: "Twitter",
+    url: "/",
+  },
   {
     label: "Terms",
+    url: "/",
   },
   {
     label: "Privacy",
+    url: "/",
   },
 ];

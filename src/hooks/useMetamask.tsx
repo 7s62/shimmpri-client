@@ -1,14 +1,6 @@
-import {
-  useState,
-  useEffect,
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useCallback,
-} from "react";
-
 import detectEthereumProvider from "@metamask/detect-provider";
-import {formatBalance} from "../utils/format";
+import { createContext, PropsWithChildren, useCallback, useContext, useEffect, useState } from "react";
+import { formatBalance } from "../utils/format";
 
 interface WalletState {
   accounts: any[];
@@ -28,13 +20,11 @@ interface MetaMaskContextData {
   clearError: () => void;
 }
 
-const disconnectedState: WalletState = {accounts: [], balance: "", chainId: ""};
+const disconnectedState: WalletState = { accounts: [], balance: "", chainId: "" };
 
-const MetaMaskContext = createContext<MetaMaskContextData>(
-  {} as MetaMaskContextData
-);
+const MetaMaskContext = createContext<MetaMaskContextData>({} as MetaMaskContextData);
 
-export const MetaMaskContextProvider = ({children}: PropsWithChildren) => {
+export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
   const [hasProvider, setHasProvider] = useState<boolean | null>(null);
 
   const [isConnecting, setIsConnecting] = useState(false);
@@ -46,9 +36,7 @@ export const MetaMaskContextProvider = ({children}: PropsWithChildren) => {
   const [wallet, setWallet] = useState(disconnectedState);
   // useCallback ensures that you don't uselessly recreate the _updateWallet function on every render
   const _updateWallet = useCallback(async (providedAccounts?: any) => {
-    const accounts =
-      providedAccounts ||
-      (await (window as any).ethereum.request({method: "eth_accounts"}));
+    const accounts = providedAccounts || (await (window as any).ethereum.request({ method: "eth_accounts" }));
 
     if (accounts.length === 0) {
       // If there are no accounts, then the user is disconnected
@@ -60,22 +48,16 @@ export const MetaMaskContextProvider = ({children}: PropsWithChildren) => {
       await (window as any).ethereum.request({
         method: "eth_getBalance",
         params: [accounts[0], "latest"],
-      })
+      }),
     );
     const chainId = await (window as any).ethereum.request({
       method: "eth_chainId",
     });
 
-    setWallet({accounts, balance, chainId});
+    setWallet({ accounts, balance, chainId });
   }, []);
-  const updateWalletAndAccounts = useCallback(
-    () => _updateWallet(),
-    [_updateWallet]
-  );
-  const updateWallet = useCallback(
-    (accounts: any) => _updateWallet(accounts),
-    [_updateWallet]
-  );
+  const updateWalletAndAccounts = useCallback(() => _updateWallet(), [_updateWallet]);
+  const updateWallet = useCallback((accounts: any) => _updateWallet(accounts), [_updateWallet]);
   /**
    * This logic checks if MetaMask is installed. If it is, some event handlers are set up
    * to update the wallet state when MetaMask changes. The function returned by useEffect
@@ -84,7 +66,7 @@ export const MetaMaskContextProvider = ({children}: PropsWithChildren) => {
    */
   useEffect(() => {
     const getProvider = async () => {
-      const provider = await detectEthereumProvider({silent: true});
+      const provider = await detectEthereumProvider({ silent: true });
       setHasProvider(Boolean(provider));
 
       if (provider) {
@@ -98,10 +80,7 @@ export const MetaMaskContextProvider = ({children}: PropsWithChildren) => {
 
     return () => {
       (window as any).ethereum?.removeListener("accountsChanged", updateWallet);
-      (window as any).ethereum?.removeListener(
-        "chainChanged",
-        updateWalletAndAccounts
-      );
+      (window as any).ethereum?.removeListener("chainChanged", updateWalletAndAccounts);
     };
   }, [updateWallet, updateWalletAndAccounts]);
 
@@ -153,12 +132,10 @@ export const MetaMaskContextProvider = ({children}: PropsWithChildren) => {
   );
 };
 
-export const useMetaMask = () => {
+export const useMetamask = () => {
   const context = useContext(MetaMaskContext);
   if (context === undefined) {
-    throw new Error(
-      'useMetaMask must be used within a "MetaMaskContextProvider"'
-    );
+    throw new Error('useMetamask must be used within a "MetaMaskContextProvider"');
   }
   return context;
 };

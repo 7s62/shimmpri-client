@@ -1,8 +1,6 @@
-// Copyright (c) Fewcha. All rights reserved.
-
-import {Action, configureStore, ThunkAction} from "@reduxjs/toolkit";
-import toastReducer from "../components/toast/toastReducer";
-import rankReducer from "../redux/rank/rank.reducer";
+import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import toastReducer from "../components/Toast/toastReducer";
+import rankReducer from "../features/leaderboard/reducer";
 
 const createStore = () => {
   return configureStore({
@@ -23,9 +21,4 @@ export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type StoreType = typeof store;
 
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;

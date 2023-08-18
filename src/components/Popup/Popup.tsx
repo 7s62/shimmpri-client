@@ -1,9 +1,7 @@
-// Copyright (c) Fewcha. All rights reserved.
-
-import React, {PropsWithChildren} from "react";
+import React, { PropsWithChildren } from "react";
 import cn from "../../services/cn";
 
-const Popup: React.FC<PropsWithChildren<{className?: string}>> = ({
+const Popup: React.FC<PropsWithChildren<{ className?: string }>> = ({
   children,
   className,
 }) => {

@@ -1,5 +1,3 @@
-// Copyright (c) Fewcha. All rights reserved.
-
 import Joi from "joi";
 
 export interface ToastReducer {

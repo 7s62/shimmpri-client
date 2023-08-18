@@ -1,5 +1,3 @@
-// Copyright (c) Fewcha. All rights reserved.
-
 // http://github.com/gpxl-dev/truncate-eth-address/blob/main/src/index.ts
 
 // Captures 0x + 4 characters, then the last 4 characters.

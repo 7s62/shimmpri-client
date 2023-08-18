@@ -1,13 +1,5 @@
-import * as React from "react";
 const KingYellow = () => (
-  <svg
-    width="300"
-    height="300"
-    viewBox="0 0 300 300"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-  >
+  <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
     <g clip-path="url(#clip0_2_750)">
       <path
         fill-rule="evenodd"
@@ -21,9 +13,9 @@ const KingYellow = () => (
         d="M63.9381 76.7421C62.7773 75.9476 61.4614 75.4078 60.0771 75.1581C58.6927 74.9085 57.2712 74.9546 55.9059 75.2936C54.5407 75.6326 53.2626 76.2566 52.1558 77.1248C51.0489 77.993 50.1383 79.0856 49.4839 80.3308L38.5984 101.185L38.718 101.394L65.3437 118.799C69.4657 121.497 74.4407 122.574 79.3094 121.821C84.1781 121.068 88.5957 118.539 91.7102 114.722L101.679 102.461L63.9381 76.7421ZM99.8506 102.728L63.2342 77.7751C62.2189 77.0802 61.066 76.6066 59.8552 76.3883C58.6444 76.1699 57.4012 76.2103 56.2071 76.5068C55.0131 76.8032 53.8953 77.349 52.9272 78.1083C51.9596 78.8673 51.1635 79.8224 50.5912 80.9108C50.5909 80.9113 50.5914 80.9103 50.5912 80.9108L40.1799 100.856L66.0276 117.753C69.8912 120.282 74.555 121.291 79.1184 120.585C83.6819 119.88 87.8224 117.509 90.7417 113.932L99.8506 102.728ZM209.44 113.929L200.331 102.725L236.957 77.7727C237.971 77.0824 239.12 76.6139 240.328 76.3981C241.536 76.1822 242.776 76.2237 243.966 76.52C245.157 76.8163 246.272 77.3605 247.238 78.1173C248.203 78.8732 248.998 79.8241 249.57 80.908C249.57 80.9068 249.571 80.9091 249.57 80.908L259.944 100.853L234.153 117.75C230.29 120.279 225.627 121.288 221.063 120.583C216.5 119.877 212.359 117.506 209.44 113.929ZM234.838 118.796C230.716 121.494 225.741 122.571 220.872 121.818C216.003 121.065 211.586 118.536 208.471 114.719L198.503 102.458L236.253 76.7393C237.413 75.95 238.727 75.4144 240.108 75.1676C241.489 74.9207 242.907 74.9682 244.268 75.307C245.63 75.6457 246.904 76.268 248.009 77.1333C249.113 77.9985 250.023 79.0871 250.678 80.328L261.523 101.182L261.404 101.391L234.838 118.796Z"
         fill="white"
         fill-opacity="0.5"
-        style={{mixBlendMode: "soft-light"}}
+        style={{ mixBlendMode: "soft-light" }}
       />
-      <g style={{mixBlendMode: "soft-light"}}>
+      <g style={{ mixBlendMode: "soft-light" }}>
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -37,25 +29,25 @@ const KingYellow = () => (
           fill="#FF9B00"
         />
       </g>
-      <g style={{mixBlendMode: "overlay"}}>
+      <g style={{ mixBlendMode: "overlay" }}>
         <path
           d="M299.851 94.4137L284.968 183.721L284.679 185.455L284.539 186.323L283.682 191.446L283.433 192.962L283.303 193.749L282.426 199.002L282.127 200.777L281.977 201.664L281.26 205.99L280.981 207.685L280.841 208.542L278.429 222.996L278.179 224.482H20.9938L19.8175 217.105L18.5715 209.32L18.4419 208.482L18.1727 206.838L17.4251 202.202L17.2855 201.315L16.9965 199.521L16.2289 194.786L16.1192 194.078L15.8401 192.324L14.9529 186.901L14.8134 186.024L14.5343 184.289L0.129864 94.2442C-0.189328 92.3314 0.0563239 90.3671 0.836724 88.5918C1.61713 86.8166 2.89839 85.3075 4.52354 84.2494C6.14869 83.1914 8.04717 82.6304 9.98639 82.635C11.9256 82.6397 13.8213 83.2099 15.4414 84.2758L38.7177 99.5674L65.2836 116.972C69.4055 119.67 74.3806 120.747 79.2493 119.994C84.118 119.241 88.5356 116.712 91.6501 112.895L101.618 100.634L138.502 55.4969C139.904 53.7791 141.671 52.3946 143.674 51.4439C145.678 50.4931 147.867 49.9999 150.085 49.9999C152.303 49.9999 154.492 50.4931 156.496 51.4439C158.499 52.3946 160.266 53.7791 161.668 55.4969L198.502 100.634L208.47 112.895C211.585 116.712 216.002 119.241 220.871 119.994C225.74 120.747 230.715 119.67 234.837 116.972L261.542 99.4876L284.469 84.4353C286.09 83.3461 287.996 82.757 289.949 82.7412C291.901 82.7255 293.816 83.2837 295.454 84.3465C297.093 85.4094 298.383 86.9301 299.164 88.7199C299.946 90.5096 300.185 92.4895 299.851 94.4137Z"
           fill="url(#paint1_linear_2_750)"
         />
       </g>
-      <g style={{mixBlendMode: "overlay"}} opacity="0.3">
+      <g style={{ mixBlendMode: "overlay" }} opacity="0.3">
         <path
           d="M299.851 94.4137L284.968 183.721L284.679 185.455L284.539 186.323L283.682 191.446L283.433 192.962L283.303 193.749L282.426 199.002L282.127 200.777L281.977 201.664L281.26 205.99L280.981 207.685L280.841 208.542L278.429 222.996L278.179 224.482H20.9938L19.8175 217.105L18.5715 209.32L18.4419 208.482L18.1727 206.838L17.4251 202.202L17.2855 201.315L16.9965 199.521L16.2289 194.786L16.1192 194.078L15.8401 192.324L14.9529 186.901L14.8134 186.024L14.5343 184.289L0.129864 94.2442C-0.189328 92.3314 0.0563239 90.3671 0.836724 88.5918C1.61713 86.8166 2.89839 85.3075 4.52354 84.2494C6.14869 83.1914 8.04717 82.6304 9.98639 82.635C11.9256 82.6397 13.8213 83.2099 15.4414 84.2758L38.7177 99.5674L65.2836 116.972C69.4055 119.67 74.3806 120.747 79.2493 119.994C84.118 119.241 88.5356 116.712 91.6501 112.895L101.618 100.634L138.502 55.4969C139.904 53.7791 141.671 52.3946 143.674 51.4439C145.678 50.4931 147.867 49.9999 150.085 49.9999C152.303 49.9999 154.492 50.4931 156.496 51.4439C158.499 52.3946 160.266 53.7791 161.668 55.4969L198.502 100.634L208.47 112.895C211.585 116.712 216.002 119.241 220.871 119.994C225.74 120.747 230.715 119.67 234.837 116.972L261.542 99.4876L284.469 84.4353C286.09 83.3461 287.996 82.757 289.949 82.7412C291.901 82.7255 293.816 83.2837 295.454 84.3465C297.093 85.4094 298.383 86.9301 299.164 88.7199C299.946 90.5096 300.185 92.4895 299.851 94.4137Z"
           fill="url(#paint2_linear_2_750)"
         />
       </g>
-      <g style={{mixBlendMode: "overlay"}}>
+      <g style={{ mixBlendMode: "overlay" }}>
         <path
           d="M299.851 94.4198L299.143 98.6663C298.553 97.347 297.684 96.1717 296.595 95.2219C295.505 94.272 294.223 93.5704 292.836 93.1655C291.448 92.7606 289.99 92.6621 288.56 92.877C287.131 93.0919 285.766 93.6149 284.559 94.4098L261.632 109.462L234.877 126.947C230.755 129.645 225.779 130.721 220.911 129.969C216.042 129.216 211.625 126.687 208.51 122.87L196.787 111.625L159.964 65.4715C153.983 58.1347 146.078 58.1347 140.097 65.4715L103.961 110.808L93.5142 123.956C87.0646 131.861 73.8265 132.529 65.2836 126.947L38.7177 109.542L15.4414 94.3002C14.2298 93.5016 12.8585 92.9771 11.4232 92.7635C9.98796 92.5498 8.52335 92.6521 7.1317 93.0631C5.74005 93.4741 4.45491 94.1841 3.36606 95.1432C2.27722 96.1024 1.41091 97.2878 0.827654 98.6165L0.129864 94.2503C-0.189328 92.3376 0.0563239 90.3732 0.836724 88.5979C1.61713 86.8227 2.89839 85.3136 4.52354 84.2556C6.14869 83.1975 8.04717 82.6365 9.98639 82.6411C11.9256 82.6458 13.8213 83.216 15.4414 84.2819L38.7177 99.5735L65.2836 116.978C69.4055 119.677 74.3806 120.753 79.2493 120C84.118 119.247 88.5356 116.718 91.6501 112.901L101.618 100.64L138.502 55.503C139.904 53.7852 141.671 52.4007 143.674 51.45C145.678 50.4992 147.867 50.006 150.085 50.006C152.303 50.006 154.492 50.4992 156.496 51.45C158.499 52.4007 160.266 53.7852 161.668 55.503L198.502 100.64L208.47 112.901C211.585 116.718 216.002 119.247 220.871 120C225.74 120.753 230.715 119.677 234.837 116.978L261.542 99.4937L284.469 84.4414C286.09 83.3522 287.996 82.7631 289.949 82.7473C291.901 82.7316 293.816 83.2898 295.454 84.3526C297.093 85.4155 298.383 86.9363 299.164 88.726C299.946 90.5157 300.185 92.4956 299.851 94.4198Z"
           fill="white"
         />
       </g>
-      <g style={{mixBlendMode: "soft-light"}} opacity="0.5">
+      <g style={{ mixBlendMode: "soft-light" }} opacity="0.5">
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -63,7 +55,7 @@ const KingYellow = () => (
           fill="white"
         />
       </g>
-      <g style={{mixBlendMode: "hard-light"}}>
+      <g style={{ mixBlendMode: "hard-light" }}>
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -78,7 +70,7 @@ const KingYellow = () => (
       <path
         d="M150.004 253.404C221.024 253.404 278.597 240.461 278.597 224.496C278.597 208.53 221.024 195.587 150.004 195.587C78.9841 195.587 21.4111 208.53 21.4111 224.496C21.4111 240.461 78.9841 253.404 150.004 253.404Z"
         fill="url(#paint3_linear_2_750)"
-        style={{mixBlendMode: "overlay"}}
+        style={{ mixBlendMode: "overlay" }}
       />
       <path
         d="M150.001 243.916C211.662 243.916 261.647 235.882 261.647 225.972C261.647 216.063 211.662 208.029 150.001 208.029C88.3405 208.029 38.3547 216.063 38.3547 225.972C38.3547 235.882 88.3405 243.916 150.001 243.916Z"
@@ -88,37 +80,29 @@ const KingYellow = () => (
         d="M150.001 243.916C211.662 243.916 261.647 235.882 261.647 225.972C261.647 216.063 211.662 208.029 150.001 208.029C88.3405 208.029 38.3547 216.063 38.3547 225.972C38.3547 235.882 88.3405 243.916 150.001 243.916Z"
         fill="url(#paint4_linear_2_750)"
         fill-opacity="0.6"
-        style={{mixBlendMode: "soft-light"}}
+        style={{ mixBlendMode: "soft-light" }}
       />
-      <g style={{mixBlendMode: "overlay"}}>
+      <g style={{ mixBlendMode: "overlay" }}>
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
           d="M129.631 97.1393L143.33 79.1164C146.532 74.9045 152.867 74.9045 156.068 79.1164L169.767 97.1393C171.983 100.054 171.937 104.1 169.657 106.964L155.957 124.167C152.755 128.19 146.644 128.189 143.441 124.167L129.742 106.964C127.461 104.1 127.416 100.054 129.631 97.1393ZM133.612 100.165L147.311 82.1421C148.511 80.5627 150.887 80.5627 152.088 82.1421L165.787 100.165C166.617 101.258 166.6 102.775 165.745 103.849L152.046 121.053C150.845 122.561 148.553 122.561 147.352 121.053L133.653 103.849C132.798 102.775 132.781 101.258 133.612 100.165Z"
           fill="white"
-          style={{mixBlendMode: "soft-light"}}
+          style={{ mixBlendMode: "soft-light" }}
         />
       </g>
       <path
         d="M147.311 82.1421L133.612 100.165C132.781 101.258 132.798 102.775 133.653 103.849L147.352 121.053C148.553 122.561 150.845 122.561 152.046 121.053L165.745 103.849C166.6 102.775 166.617 101.258 165.787 100.165L152.088 82.1421C150.887 80.5627 148.511 80.5627 147.311 82.1421Z"
         fill="#FF9F0A"
       />
-      <g style={{mixBlendMode: "overlay"}}>
+      <g style={{ mixBlendMode: "overlay" }}>
         <path
           d="M147.311 82.1421L133.612 100.165C132.781 101.258 132.798 102.775 133.653 103.849L147.352 121.053C148.553 122.561 150.845 122.561 152.046 121.053L165.745 103.849C166.6 102.775 166.617 101.258 165.787 100.165L152.088 82.1421C150.887 80.5627 148.511 80.5627 147.311 82.1421Z"
           fill="url(#paint5_linear_2_750)"
         />
       </g>
-      <g style={{mixBlendMode: "soft-light"}}>
-        <mask
-          id="mask0_2_750"
-          style={{maskType: "alpha"}}
-          maskUnits="userSpaceOnUse"
-          x="-1"
-          y="50"
-          width="301"
-          height="204"
-        >
+      <g style={{ mixBlendMode: "soft-light" }}>
+        <mask id="mask0_2_750" style={{ maskType: "alpha" }} maskUnits="userSpaceOnUse" x="-1" y="50" width="301" height="204">
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -133,156 +117,64 @@ const KingYellow = () => (
           />
         </mask>
         <g mask="url(#mask0_2_750)">
-          <g style={{mixBlendMode: "soft-light"}}>
-            <rect
-              x="-450"
-              y="750"
-              width="1200"
-              height="1200"
-              transform="rotate(-90 -450 750)"
-              fill="url(#pattern0)"
-              fill-opacity="0.6"
-            />
+          <g style={{ mixBlendMode: "soft-light" }}>
+            <rect x="-450" y="750" width="1200" height="1200" transform="rotate(-90 -450 750)" fill="url(#pattern0)" fill-opacity="0.6" />
           </g>
         </g>
       </g>
     </g>
     <defs>
-      <filter
-        id="filter0_i_2_750"
-        x="-0.00634766"
-        y="49"
-        width="300.004"
-        height="175.482"
-        filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
-      >
+      <filter id="filter0_i_2_750" x="-0.00634766" y="49" width="300.004" height="175.482" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
         <feFlood flood-opacity="0" result="BackgroundImageFix" />
-        <feBlend
-          mode="normal"
-          in="SourceGraphic"
-          in2="BackgroundImageFix"
-          result="shape"
-        />
-        <feColorMatrix
-          in="SourceAlpha"
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          result="hardAlpha"
-        />
+        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
         <feOffset dy="-1" />
         <feGaussianBlur stdDeviation="1" />
         <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
-        <feColorMatrix
-          type="matrix"
-          values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
-        />
-        <feBlend
-          mode="overlay"
-          in2="shape"
-          result="effect1_innerShadow_2_750"
-        />
+        <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0" />
+        <feBlend mode="overlay" in2="shape" result="effect1_innerShadow_2_750" />
       </filter>
-      <pattern
-        id="pattern0"
-        patternContentUnits="objectBoundingBox"
-        width="0.746667"
-        height="0.448"
-      >
+      <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="0.746667" height="0.448">
         <use xlinkHref="#image0_2_750" transform="scale(0.000583333)" />
       </pattern>
-      <linearGradient
-        id="paint0_linear_2_750"
-        x1="37.5028"
-        y1="76.8187"
-        x2="262.503"
-        y2="76.8187"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stop-color="white" stop-opacity="0" />
-        <stop offset="0.182094" stop-color="white" />
-        <stop offset="0.83449" stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+      <linearGradient id="paint0_linear_2_750" x1="37.5028" y1="76.8187" x2="262.503" y2="76.8187" gradientUnits="userSpaceOnUse">
+        <stop stopColor="white" stop-opacity="0" />
+        <stop offset="0.182094" stopColor="white" />
+        <stop offset="0.83449" stopColor="white" />
+        <stop offset="1" stopColor="white" stop-opacity="0" />
       </linearGradient>
-      <linearGradient
-        id="paint1_linear_2_750"
-        x1="-24.9985"
-        y1="137.5"
-        x2="325.002"
-        y2="137.5"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stop-color="white" />
-        <stop offset="0.249953" stop-color="white" stop-opacity="0" />
-        <stop offset="0.494792" stop-color="white" />
-        <stop offset="0.72541" stop-color="white" stop-opacity="0" />
-        <stop offset="1" stop-color="white" />
+      <linearGradient id="paint1_linear_2_750" x1="-24.9985" y1="137.5" x2="325.002" y2="137.5" gradientUnits="userSpaceOnUse">
+        <stop stopColor="white" />
+        <stop offset="0.249953" stopColor="white" stop-opacity="0" />
+        <stop offset="0.494792" stopColor="white" />
+        <stop offset="0.72541" stopColor="white" stop-opacity="0" />
+        <stop offset="1" stopColor="white" />
       </linearGradient>
-      <linearGradient
-        id="paint2_linear_2_750"
-        x1="150.002"
-        y1="49.9999"
-        x2="150.002"
-        y2="193.75"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+      <linearGradient id="paint2_linear_2_750" x1="150.002" y1="49.9999" x2="150.002" y2="193.75" gradientUnits="userSpaceOnUse">
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stop-opacity="0" />
       </linearGradient>
-      <linearGradient
-        id="paint3_linear_2_750"
-        x1="18.7515"
-        y1="231.247"
-        x2="281.252"
-        y2="231.247"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+      <linearGradient id="paint3_linear_2_750" x1="18.7515" y1="231.247" x2="281.252" y2="231.247" gradientUnits="userSpaceOnUse">
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stop-opacity="0" />
       </linearGradient>
-      <linearGradient
-        id="paint4_linear_2_750"
-        x1="43.7487"
-        y1="231.25"
-        x2="262.499"
-        y2="231.25"
-        gradientUnits="userSpaceOnUse"
-      >
+      <linearGradient id="paint4_linear_2_750" x1="43.7487" y1="231.25" x2="262.499" y2="231.25" gradientUnits="userSpaceOnUse">
         <stop />
         <stop offset="0.203125" stop-opacity="0" />
         <stop offset="0.484375" />
         <stop offset="0.770833" stop-opacity="0" />
         <stop offset="1" />
       </linearGradient>
-      <linearGradient
-        id="paint5_linear_2_750"
-        x1="139.199"
-        y1="85.5"
-        x2="161.699"
-        y2="108.5"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+      <linearGradient id="paint5_linear_2_750" x1="139.199" y1="85.5" x2="161.699" y2="108.5" gradientUnits="userSpaceOnUse">
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stop-opacity="0" />
       </linearGradient>
-      <linearGradient
-        id="paint6_linear_2_750"
-        x1="18.7528"
-        y1="231.247"
-        x2="281.253"
-        y2="231.247"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+      <linearGradient id="paint6_linear_2_750" x1="18.7528" y1="231.247" x2="281.253" y2="231.247" gradientUnits="userSpaceOnUse">
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stop-opacity="0" />
       </linearGradient>
       <clipPath id="clip0_2_750">
-        <rect
-          width="300"
-          height="203.406"
-          fill="white"
-          transform="translate(0 50)"
-        />
+        <rect width="300" height="203.406" fill="white" transform="translate(0 50)" />
       </clipPath>
       <image
         id="image0_2_750"

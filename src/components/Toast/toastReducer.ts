@@ -1,7 +1,5 @@
-// Copyright (c) Fewcha. All rights reserved.
-
-import {createAction, createReducer} from "@reduxjs/toolkit";
-import {ToastReducer} from "./types";
+import { createAction, createReducer } from "@reduxjs/toolkit";
+import { ToastReducer } from "./types";
 
 export const setToast = createAction<ToastReducer>("app/toast");
 

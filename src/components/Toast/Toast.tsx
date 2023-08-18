@@ -1,13 +1,13 @@
-// Copyright (c) Fewcha. All rights reserved.
+import React, { useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../app/hooks";
+import { RootState } from "../../app/store";
+import { emptyToast, setToast } from "./toastReducer";
 
-import React, {useEffect} from "react";
-import toast, {Toaster} from "react-hot-toast";
-import {useDispatch} from "react-redux";
-import {useAppSelector} from "../../app/hooks";
-import {RootState} from "../../app/store";
-import {emptyToast, setToast} from "./toastReducer";
-
-const Toast: React.FC<{isOnboarding?: boolean}> = ({isOnboarding = false}) => {
+const Toast: React.FC<{ isOnboarding?: boolean }> = ({
+  isOnboarding = false,
+}) => {
   const dispatch = useDispatch();
 
   const toastRedux = useAppSelector((state: RootState) => state.toast);
@@ -19,7 +19,7 @@ const Toast: React.FC<{isOnboarding?: boolean}> = ({isOnboarding = false}) => {
           toast.error(toastRedux.message);
           break;
         case "success":
-          toast.success(toastRedux.message, {duration: 1500});
+          toast.success(toastRedux.message, { duration: 1500 });
           break;
         case "info":
           toast.success(toastRedux.message);

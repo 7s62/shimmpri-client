@@ -16,25 +16,33 @@
   // background-color: rgb(243 244 245 / var(--tw-bg-opacity));
 }
 
-.bg-absolute-color {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: -5%;
 
-  // z-index: -99;
-  background-image: url("../assets/images/ellipse4.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 500px;
-  height: 500px;
-  /* Add the blur effect */
+body {
+  &:after {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: -5%;
+
+    // z-index: -99;
+    background-image: url("../assets/images/home-bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 500px;
+    height: 500px;
+    /* Add the blur effect */
+
+    display: block;
+    content: "";
+  }
 }
 
 .skyline-dex--input {
   border-radius: 12px;
 }
+
 .skyline--input-hide-arrows {
+
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     appearance: none;
@@ -54,4 +62,9 @@
     inset -7px 7px 5px -4px rgba(174, 174, 192, 0.4);
   box-sizing: border-box;
   transition: all 0.15s ease-out;
+}
+
+.popup-background {
+  background: rgba(255, 227, 227, 0.1) !important;
+  backdrop-filter: blur(3px) !important;
 }

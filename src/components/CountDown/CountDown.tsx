@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from "react";
-const CountDown: React.FC<{duration: number}> = ({duration}) => {
-  console.log("7s2005:duration");
+import React, { useEffect, useState } from "react";
+
+const CountDown: React.FC<{ duration: number }> = ({ duration }) => {
   const [time, setTime] = useState<any>();
+
   useEffect(() => {
     let endTime = new Date();
     endTime.setMinutes(endTime.getMinutes() + duration);
@@ -26,14 +27,15 @@ const CountDown: React.FC<{duration: number}> = ({duration}) => {
       }
       setTime(newValue);
     }, 1000);
-  }, []);
+  }, [duration]);
+
   let formatNumber = (num: number) => {
     return num.toLocaleString("en-US", {
       minimumIntegerDigits: 2,
       useGrouping: false,
     });
   };
-  return <p className="Timer">{time}</p>;
+  return <div className="Timer">{time}</div>;
 };
 
 export default CountDown;
