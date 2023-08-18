@@ -16,6 +16,7 @@ import Popup from "../components/Popup/Popup";
 import { usePopups } from "../components/Popup/PopupProvider";
 import { setToast } from "../components/Toast/toastReducer";
 import config from "../config";
+import { Rates } from "../data/content";
 import { getRanks, selectRanks } from "../features/leaderboard/reducer";
 import abi from "../services/abi.json";
 import { sleep } from "../utils/sleep";
@@ -97,6 +98,10 @@ const Home: React.FC = () => {
         ...config.contract,
         functionName: "baseExtension",
       },
+      {
+        ...config.contract,
+        functionName: "totalSupply",
+      },
     ],
   });
 
@@ -143,6 +148,7 @@ const Home: React.FC = () => {
   const mintPerDay = (Number(contract?.[2].result) || 0) as number;
   const baseTokenURI = (contract?.[3].result || "") as string;
   const baseExtension = (contract?.[4].result || "") as string;
+  const totalSupply = (Number(contract?.[5].result) || 0) as number;
 
   // console.log("contract", contract, startTime, currentDay, mintPerDay, baseTokenURI, baseExtension);
 
@@ -159,7 +165,6 @@ const Home: React.FC = () => {
       setTokenURI(`${baseTokenURI}${nftId}${baseExtension}`);
     }
   }, [mintSuccess, isFetched, txData, baseTokenURI, baseExtension]);
-
   useEffect(() => {
     if (tokenURI) {
       dispatch(
@@ -345,6 +350,15 @@ const Home: React.FC = () => {
         </div>
       </div>
 
+      <div className="max-w-[512px] flex flex-col justify-center items-center mx-auto p-6 mt-6 space-y-4 bg-[#251163] border border-none rounded-xl">
+        <div className="text-[28px] leading-[28px] font-bold">
+          <div className="flex justify-center items-center space-x-2">
+            <h2>Total Supply</h2>
+          </div>
+        </div>
+        <div className="text-[20px] leading-[20px] font-bold">{totalSupply} / 1800</div>
+      </div>
+
       <div className="max-w-[1000px] mx-auto px-6 py-16">
         <h2 className="text-[32px] leading-[32px] font-bold my-4 lg:px-20">The limitations of Balue NFT and Minting Process</h2>
         <div className="text-[18px] leading-[20px] py-4">
@@ -352,11 +366,45 @@ const Home: React.FC = () => {
           on its rarity. The <span className="text-tao font-bold">higher the score</span> , the <span className="text-tao font-bold">rarer the NFT.</span>
         </div>
         <div className="text-[18px] pb-4">
-          The event will run for <span className="text-tao font-bold">2 weeks.</span> During this timeframe, we will conduct{" "}
-          <span className="text-tao font-bold">3 rounds per week.</span> Based on an emphasis on the worth of NFT ownership. We have set a cap of{" "}
+          The event will run for <span className="text-tao font-bold">6 days.</span> During this timeframe, we will conduct{" "}
+          <span className="text-tao font-bold">1 rounds per week.</span> Based on an emphasis on the worth of NFT ownership. We have set a cap of{" "}
           <span className="text-tao font-bold">300 NFTs</span> that can be <span className="text-tao font-bold">minted in each round</span> to accommodate the fastest players. This
           approach ensures uniqueness and scarcity in each successfully minted artwork <span className="text-tao font-bold">(as represented in the minted NFT's Points)</span>, as
           well as fostering competition and enthusiasm throughout the participation process.
+        </div>
+
+        <div className="relative overflow-x-auto max-w-[512px] mx-auto border border-none rounded-xl mt-4">
+          <table className="w-full text-sm !text-white">
+            <thead className="text-xs !text-white uppercase bg-btnprimary">
+              <tr>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Level
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Point Range
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Maximum amount
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Possibility
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {Rates.map((e, i) => {
+                return (
+                  <tr key={i} className="bg-[#251163] w-full border border-none rounded-xl text-gray-300">
+                    <td className="px-4 py-3 text-center">{5 - i}</td>
+
+                    <td className="px-4 py-3 text-center">{e.point}</td>
+                    <td className="px-4 py-3 text-center">{e.maximumAmount}</td>
+                    <td className="px-4 py-3 text-center">{e.possiblity}%</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
 
