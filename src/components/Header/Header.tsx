@@ -36,7 +36,7 @@ const Header: React.FC<{}> = () => {
             {/* sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 */}
             <div className="flex items-center justify-between">
               <a href="/" className="-m-1.5 p-1.5">
-                <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                <img className="h-8 w-auto" src="/balue-logo-black.svg" alt="" />
               </a>
               <button type="button" className="w-[24px] h-[24px]" onClick={() => onHanldeOpenMobileMenu()}>
                 <CloseOutline color="black" />
