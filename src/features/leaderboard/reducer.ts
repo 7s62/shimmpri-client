@@ -1,10 +1,11 @@
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import config from "../../config";
 import { defaultRankReducer, Rank } from "./types";
 
 export const getRanks = createAsyncThunk("ranks/get", async (): Promise<Rank[]> => {
   try {
-    const RANK_API = "https://staging-api.balue.xyz/v1/leaderboard";
+    const RANK_API = `${config.apiURL}/v1/leaderboard`;
     const data = await fetch(RANK_API, { method: "GET", headers: { "Content-Type": "text/plain" } })
       .then(async (data) => {
         return await data.json();

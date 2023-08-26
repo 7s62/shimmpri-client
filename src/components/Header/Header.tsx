@@ -14,7 +14,7 @@ const Header: React.FC<{}> = () => {
       <nav className="mx-auto !max-w-[1200px] flex items-center justify-between p-6 lg:px-8 w-full pt-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <a className="cursor-pointer !z-2" href="/">
-            <img src="/balue-logo.svg" alt="balue logo" width={250} />
+            <img src="/shimmpri.png" alt="shimmpri logo" width={250} />
           </a>
         </div>
 
@@ -36,7 +36,7 @@ const Header: React.FC<{}> = () => {
             {/* sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 */}
             <div className="flex items-center justify-between">
               <a href="/" className="-m-1.5 p-1.5">
-                <img className="h-8 w-auto" src="/balue-logo-black.svg" alt="" />
+                <img className="h-8 w-auto" src="/shimmpri-logo-black.svg" alt="" />
               </a>
               <button type="button" className="w-[24px] h-[24px]" onClick={() => onHanldeOpenMobileMenu()}>
                 <CloseOutline color="black" />

@@ -2,7 +2,6 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Provider } from "react-redux";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { store } from "../../app/store";
@@ -15,7 +14,26 @@ import Toast from "../Toast/Toast";
 
 const App: React.FC = () => {
   const { chains, publicClient } = configureChains(
-    [goerli],
+    [
+      {
+        id: 1072,
+        name: "ShimmerEVM Testnet",
+        network: "shimmer",
+        nativeCurrency: {
+          decimals: 18,
+          name: "Shimmer",
+          symbol: "SMR",
+        },
+        rpcUrls: {
+          public: { http: ["https://json-rpc.evm.testnet.shimmer.network"] },
+          default: { http: ["https://json-rpc.evm.testnet.shimmer.network"] },
+        },
+        blockExplorers: {
+          default: { name: "Shimmer", url: "https://explorer.evm.testnet.shimmer.network/tx" },
+        },
+        testnet: true,
+      },
+    ],
     [
       alchemyProvider({
         apiKey: import.meta.env.VITE_ALCHEMY_KEY!,

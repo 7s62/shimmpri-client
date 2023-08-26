@@ -1,8 +1,8 @@
-name: staging-11e08a6f.shimmpri.xyz
+name: testnet.shimmpri.xyz
 
 on:
   push:
-    branches: [main]
+    branches: [shimmpri]
   workflow_dispatch:
 
 env:
@@ -59,4 +59,4 @@ jobs:
           pnpm run build:staging
 
       - name: Push website to S3
-        run: aws s3 cp dist/ s3://staging-11e08a6f.shimmpri.xyz/ --acl public-read --recursive
+        run: aws s3 cp dist/ s3://testnet.shimmpri.xyz/ --acl public-read --recursive

@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
     <footer className="py-[32px] text-white shadow-lg">
       <div className="max-w-[1200px] mx-auto flex justify-center space-x-10 items-center gap-y-4">
         <a href="/">
-          <img src="/balue-logo.svg" alt="balue logo" width={150} />
+          <img src="/shimmpri.png" alt="shimmpri logo" width={150} />
         </a>
         <div className="flex space-x-6">
           {FOOTER_MENU.map((item, index) => {
