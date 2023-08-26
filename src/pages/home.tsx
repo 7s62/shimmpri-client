@@ -181,48 +181,50 @@ const Home: React.FC = () => {
           .then(async (res: any) => {
             const metadata = await res.json();
 
-            addPopup({
-              Component: () => {
-                return (
-                  <Popup className="bg-white">
-                    <h2 className="text-center font-bold text-[24px] leading-[28px] ">Congratulation!</h2>
-                    <div className="px-3 mb-2 mt-8 border-b-[1px] border-gray-300">
-                      <div className="flex flex-col justify-center items-center space-y-2">
-                        <img className="w-[400px] h-[400px] border border-none rounded-2xl" src={metadata.image} alt="nftimg" />
-                        <div className="text-[18px] font-semibold">{metadata.name}</div>
+            setTimeout(() => {
+              addPopup({
+                Component: () => {
+                  return (
+                    <Popup className="bg-white">
+                      <h2 className="text-center font-bold text-[24px] leading-[28px] ">Congratulation!</h2>
+                      <div className="px-3 mb-2 mt-8 border-b-[1px] border-gray-300">
+                        <div className="flex flex-col justify-center items-center space-y-2">
+                          <img className="w-[400px] h-[400px] border border-none rounded-2xl" src={metadata.image} alt="nftimg" />
+                          <div className="text-[18px] font-semibold">{metadata.name}</div>
+                        </div>
+                        <div className="flex justify-center items-center space-x-2 !text-gray-900 mx-16 my-4 p-2">
+                          <DetailContainer className="font-bold" title="Level" data={metadata.attributes[0].value} />
+                          <DetailContainer className="font-bold" title="Point" data={metadata.attributes[1].value} />
+                          <DetailContainer className="font-bold" title="Day" data={metadata.attributes[2].value} />
+                        </div>
                       </div>
-                      <div className="flex justify-center items-center space-x-2 !text-gray-900 mx-16 my-4 p-2">
-                        <DetailContainer className="font-bold" title="Level" data={metadata.attributes[0].value} />
-                        <DetailContainer className="font-bold" title="Point" data={metadata.attributes[1].value} />
-                        <DetailContainer className="font-bold" title="Day" data={metadata.attributes[2].value} />
+                      <div className="w-full flex justify-between items-center !text-white">
+                        <button
+                          onClick={() => {
+                            window.open(`${config.explorerURL}/${mintData?.hash}`, "_blank", "noopener,noreferrer");
+                          }}
+                          className="flex-1 bg-tao max-w-[220px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
+                        >
+                          <p>View on explorer</p>
+                          <TravelExplore size={20} />
+                        </button>
+                        <button
+                          onClick={() => removeAll()}
+                          className="flex-1 bg-tao max-w-[200px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
+                        >
+                          <p>Back to mint</p>
+                          <Exit size={20} />
+                        </button>
                       </div>
-                    </div>
-                    <div className="w-full flex justify-between items-center !text-white">
-                      <button
-                        onClick={() => {
-                          window.open(`${config.explorerURL}/${mintData?.hash}`, "_blank", "noopener,noreferrer");
-                        }}
-                        className="flex-1 bg-tao max-w-[220px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
-                      >
-                        <p>View on explorer</p>
-                        <TravelExplore size={20} />
-                      </button>
-                      <button
-                        onClick={() => removeAll()}
-                        className="flex-1 bg-tao max-w-[200px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
-                      >
-                        <p>Back to mint</p>
-                        <Exit size={20} />
-                      </button>
-                    </div>
-                  </Popup>
-                );
-              },
-              removeCallback: () => {
-                setMinting(false);
-                setTokenURI("");
-              },
-            });
+                    </Popup>
+                  );
+                },
+                removeCallback: () => {
+                  setMinting(false);
+                  setTokenURI("");
+                },
+              });
+            }, 5000);
 
             setMinting(false);
 
