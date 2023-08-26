@@ -32,14 +32,14 @@ const Header: React.FC<{}> = () => {
 
         <div className={isActiveMobileMenu === false ? "hidden" : "md:hidden"} aria-modal="true">
           {/* <div className="fixed inset-0 !z-10"></div> */}
-          <div className="fixed inset-y-0 right-0 !z-10 w-full overflow-y-auto bg-white px-6 py-6 !text-black ">
+          <div className="fixed inset-y-0 right-0 !z-10 overflow-y-auto px-6 py-6 bg-[#848484]">
             {/* sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 */}
             <div className="flex items-center justify-between">
               <a href="/" className="-m-1.5 p-1.5">
-                <img className="h-8 w-auto" src="/shimmpri-logo-black.svg" alt="" />
+                <img className="h-8 w-auto" src="/shimmpri.png" alt="" />
               </a>
               <button type="button" className="w-[24px] h-[24px]" onClick={() => onHanldeOpenMobileMenu()}>
-                <CloseOutline color="black" />
+                <CloseOutline />
               </button>
             </div>
             <div className="mt-6 flow-root">
