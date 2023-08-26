@@ -255,7 +255,7 @@ const Home: React.FC = () => {
           <h1 className="text-[50px] leading-[50px] font-extrabold">
             <p className="text-left">Balue - Present your Value</p>
             <p className="">
-              in <span className="text-tao">Base</span> <span>this summer</span>
+              in <span className="text-[#8d1cfe]">Base</span> <span>this summer</span>
             </p>
           </h1>
           <div className="flex flex-col space-y-2 lg:flex lg:flex-row justify-center items-center space-x-6 py-6">
@@ -362,15 +362,17 @@ const Home: React.FC = () => {
       <div className="max-w-[1000px] mx-auto px-6 py-16">
         <h2 className="text-[32px] leading-[32px] font-bold my-4 lg:px-20">The limitations of Balue NFT and Minting Process</h2>
         <div className="text-[18px] leading-[20px] py-4">
-          In this campaign, we will <span className="text-tao font-bold">limit</span> the <span className="text-tao font-bold">quantity of NFT</span> because the NFT value is based
-          on its rarity. The <span className="text-tao font-bold">higher the score</span> , the <span className="text-tao font-bold">rarer the NFT.</span>
+          In this campaign, we will <span className="text-[#8d1cfe] font-bold">limit</span> the <span className="text-[#8d1cfe] font-bold">quantity of NFT</span> because the NFT
+          value is based on its rarity. The <span className="text-[#8d1cfe] font-bold">higher the score</span> , the{" "}
+          <span className="text-[#8d1cfe] font-bold">rarer the NFT.</span>
         </div>
         <div className="text-[18px] pb-4">
-          The event will run for <span className="text-tao font-bold">6 days.</span> During this timeframe, we will conduct{" "}
-          <span className="text-tao font-bold">1 rounds per week.</span> Based on an emphasis on the worth of NFT ownership. We have set a cap of{" "}
-          <span className="text-tao font-bold">300 NFTs</span> that can be <span className="text-tao font-bold">minted in each round</span> to accommodate the fastest players. This
-          approach ensures uniqueness and scarcity in each successfully minted artwork <span className="text-tao font-bold">(as represented in the minted NFT's Points)</span>, as
-          well as fostering competition and enthusiasm throughout the participation process.
+          The event will run for <span className="text-[#8d1cfe] font-bold">6 days.</span> During this timeframe, we will conduct{" "}
+          <span className="text-[#8d1cfe] font-bold">1 rounds per week.</span> Based on an emphasis on the worth of NFT ownership. We have set a cap of{" "}
+          <span className="text-[#8d1cfe] font-bold">300 NFTs</span> that can be <span className="text-[#8d1cfe] font-bold">minted in each round</span> to accommodate the fastest
+          players. This approach ensures uniqueness and scarcity in each successfully minted artwork{" "}
+          <span className="text-[#8d1cfe] font-bold">(as represented in the minted NFT's Points)</span>, as well as fostering competition and enthusiasm throughout the
+          participation process.
         </div>
 
         <div className="relative overflow-x-auto max-w-[512px] mx-auto border border-none rounded-xl mt-4">
