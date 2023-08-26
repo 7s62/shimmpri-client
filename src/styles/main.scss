@@ -18,9 +18,11 @@
 
 
 body {
+  background-color: rgb(17, 9, 41);
+
   &:after {
     position: absolute;
-    z-index: 1;
+    z-index: 0;
     top: 0;
     left: -5%;
 
@@ -35,6 +37,11 @@ body {
     display: block;
     content: "";
   }
+}
+
+#root {
+  position: relative;
+  z-index: 1;
 }
 
 .skyline-dex--input {

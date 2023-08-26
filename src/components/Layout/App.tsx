@@ -58,7 +58,7 @@ const App: React.FC = () => {
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
         <Provider store={store}>
-          <div className="main-body bg-[#110929] w-full leading-6">
+          <div className="main-body w-full leading-6">
             <Header />
             <PopupProvider>
               <Toast />
