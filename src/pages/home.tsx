@@ -224,9 +224,9 @@ const Home: React.FC = () => {
                   setTokenURI("");
                 },
               });
-            }, 5000);
 
-            setMinting(false);
+              setMinting(false);
+            }, 3000);
 
             return;
           })
