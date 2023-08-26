@@ -306,7 +306,7 @@ const Home: React.FC = () => {
         </div>
         <div className="flex max-w-[400px] justify-center items-center">
           <div>
-            <img className="max-w-[388px] max-h-[463px]  boder-none rounded-xl" src="/nft.png" alt="nft" />
+            <img className="max-w-[388px] max-h-[463px]  boder-none rounded-xl" src="/home.png" alt="nft" />
             <div className="flex flex-col space-y-3 py-2">
               <div className="flex justify-center items-center space-x-4">
                 <HomeDetailContainer title="Day" data={<LoadingV2 isLoading={contractLoading || !contractFetched}>{(Number(currentDay) + 1).toString()}</LoadingV2>} />
