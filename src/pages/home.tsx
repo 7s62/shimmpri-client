@@ -203,14 +203,14 @@ const Home: React.FC = () => {
                           onClick={() => {
                             window.open(`${config.explorerURL}/${mintData?.hash}`, "_blank", "noopener,noreferrer");
                           }}
-                          className="flex-1 bg-tao max-w-[220px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
+                          className="flex-1 bg-[#8d1cfe] max-w-[220px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
                         >
                           <p>View on explorer</p>
                           <TravelExplore size={20} />
                         </button>
                         <button
                           onClick={() => removeAll()}
-                          className="flex-1 bg-tao max-w-[200px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
+                          className="flex-1 bg-[#8d1cfe] max-w-[200px] text-[16px] leading-[32px] font-bold px-6 py-2 border border-none rounded-3xl flex space-x-2 justify-center items-center"
                         >
                           <p>Back to mint</p>
                           <Exit size={20} />
@@ -279,7 +279,7 @@ const Home: React.FC = () => {
             )}
 
             {!stillRemaining && (
-              <div className="flex justify-between items-center max-w-[350px] bg-tao py-2 px-4 border border-none rounded-xl">
+              <div className="flex justify-between items-center max-w-[350px] bg-[#8d1cfe] py-2 px-4 border border-none rounded-xl">
                 <div className="flex justify-center items-center space-x-1">
                   <Diamond size={24} />
                   <span>300</span>
@@ -292,7 +292,7 @@ const Home: React.FC = () => {
             )}
 
             {notStartYet && (
-              <div className="flex justify-between items-center max-w-[350px] bg-tao py-2 px-4 border border-none rounded-xl">
+              <div className="flex justify-between items-center max-w-[350px] bg-[#8d1cfe] py-2 px-4 border border-none rounded-xl">
                 <div className="flex justify-center items-center space-x-1">
                   <Diamond size={24} />
                   <span>300</span>
